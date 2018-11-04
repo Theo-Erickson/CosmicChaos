@@ -22,6 +22,8 @@ public class Player : MonoBehaviour {
     }
 
     void Start () {
+        //initial spawn point
+        respawnPoint = this.transform.position;
     //    if (GM == null) { GM = GameObject.Find("GameManager").GetComponent<GameManager>(); }
     }
 
@@ -29,31 +31,17 @@ public class Player : MonoBehaviour {
     void Update() {
         //If you fall through the floor
         if (this.transform.position.y < 0) {
-            this.transform.position = new Vector3(transform.position.x, 100, transform.position.z);
+            this.transform.position = respawnPoint;
         }
 
         if (Input.GetKeyDown(KeyCode.LeftShift)) {
-            print("scan");
-            scannerFilter.GetComponent<Renderer>().enabled = !scannerFilter.GetComponent<Renderer>().enabled;
-
-            //toggleWorld(otherWorld, scan);
-
             List<GameObject> children = new List<GameObject>();
-
             //get all the children of the otherWorld.
             for (int i = 0; i < otherWorld.transform.childCount; i++) {
                 children.Add(otherWorld.transform.GetChild(i).gameObject);
+                children[0].GetComponent<PhaseInteraction>().toggleMySolidity();
             }
-
-            if (scan) {
-                //disable from top to bottom
-                StartCoroutine(toggleObjectsOverTime(children, true, scan, 0.2f));
-            } else {
-            //disable from bottom to top
-                StartCoroutine(toggleObjectsOverTime(children, false, scan, 0.2f));
-            }
-            scan = !scan;
-
+            
         }
     }
 
@@ -67,31 +55,6 @@ public class Player : MonoBehaviour {
         }
     }
 
-    public void enableSphere(GameObject world, float radius, float time) {
-
-    }
-    
-
-    public IEnumerator toggleObjectsOverTime(List<GameObject> objects, bool forward, bool enable, float decayTime) {
-        yield return new WaitForSeconds(decayTime);
-        if (forward) {
-            if (objects[0].GetComponent<MeshRenderer>() != null) {
-                objects[0].GetComponent<MeshRenderer>().enabled = enable;
-            }
-            if (objects.Count > 1) {
-                objects.RemoveAt(0);
-                StartCoroutine(toggleObjectsOverTime(objects, forward, enable, decayTime));
-            }
-        } else {
-            if(objects[objects.Count-1].GetComponent<MeshRenderer>() != null) {
-                objects[objects.Count-1].GetComponent<MeshRenderer>().enabled = enable;
-            }
-            if (objects.Count > 1) {
-                objects.RemoveAt(objects.Count-1);
-                StartCoroutine(toggleObjectsOverTime(objects, forward, enable, decayTime));
-            }
-        }
-    }
     
     void OnCollisionEnter(Collision C) {
         

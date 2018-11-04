@@ -22,12 +22,11 @@ public class PhaseInteraction : MonoBehaviour {
     }
 
     void OnMouseOver() {
-        print("mouse over");
         if (Input.GetMouseButtonDown(0)) {
-            //if (enableOnClick) {
+            if (enableOnClick) {
                 print("toggle solid");
                 toggleMySolidity();
-            //}
+            }
         }
         if (Input.GetMouseButtonDown(1)) {
             if (enableOnClick) {
@@ -143,32 +142,62 @@ public class PhaseInteraction : MonoBehaviour {
     }
 
     public void toggleChildrenSolidity(bool forward) {
-        print("change children solidity phase: " + this.transform.name);
+        //print("change children solidity phase: " + this.transform.name);
         //if thos object has no parent
         if (this.transform.parent == null) {
             //no parent no children
             if (this.transform.childCount == 0) {
-                toggleMySolidity();
-            //you have children
+                print("change my solidity");
+                StartCoroutine(toggleMySolidityOverTime(0.2f));
+                //you have children
             } else {
                 List<GameObject> children = new List<GameObject>();
                 //get all other objects grouped with it
                 for (int i = 0; i < this.transform.childCount; i++) {
                     children.Add(this.transform.GetChild(i).gameObject);
+                    if (children[i].transform.childCount > 0) {
+                        for (int k = 0; k < children[i].transform.childCount; k++) {
+                            children[i].transform.GetChild(k).GetComponent<PhaseInteraction>().toggleChildrenSolidity(forward);
+                        }
+                    }
                 }
                 StartCoroutine(toggleObjectsSolidityOverTime(children, forward, 0.2f));
             }
 
         } else {
+            
             List<GameObject> children = new List<GameObject>();
             //get all other objects grouped with it
             for (int i = 0; i < this.transform.parent.childCount; i++) {
                 children.Add(this.transform.parent.GetChild(i).gameObject);
+                if (children[i].transform.childCount > 0) {
+                    for (int k = 0; k < children[i].transform.childCount; k++) {
+                        children[i].transform.GetChild(k).GetComponent<PhaseInteraction>().toggleChildrenSolidity(forward);
+                    }
+                }
             }
             StartCoroutine(toggleObjectsSolidityOverTime(children, forward, 0.2f));
+
+            /*
+            if (this.transform.childCount == 0) {
+                print("do I get here");
+                StartCoroutine(toggleMySolidityOverTime(0.2f));
+            }
+            */
+
         }
     }
 
+
+    public IEnumerator toggleMySolidityOverTime(float delay) {
+        yield return new WaitForSeconds(delay);
+        toggleMySolidity();
+    }
+
+    public IEnumerator toggleMyVisibilityOverTime(float delay) {
+        yield return new WaitForSeconds(delay);
+        toggleMyVisibility();
+    }
 
     public IEnumerator toggleObjectsSolidityOverTime(List<GameObject> objects, bool forward, float decayTime) {
         yield return new WaitForSeconds(decayTime);

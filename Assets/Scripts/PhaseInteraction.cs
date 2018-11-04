@@ -157,7 +157,9 @@ public class PhaseInteraction : MonoBehaviour {
                     children.Add(this.transform.GetChild(i).gameObject);
                     if (children[i].transform.childCount > 0) {
                         for (int k = 0; k < children[i].transform.childCount; k++) {
-                            children[i].transform.GetChild(k).GetComponent<PhaseInteraction>().toggleChildrenSolidity(forward);
+                            if (children[i].transform.GetChild(k).GetComponent<PhaseInteraction>() != null) {
+                                children[i].transform.GetChild(k).GetComponent<PhaseInteraction>().toggleChildrenSolidity(forward);
+                            }
                         }
                     }
                 }
@@ -172,7 +174,9 @@ public class PhaseInteraction : MonoBehaviour {
                 children.Add(this.transform.parent.GetChild(i).gameObject);
                 if (children[i].transform.childCount > 0) {
                     for (int k = 0; k < children[i].transform.childCount; k++) {
-                        children[i].transform.GetChild(k).GetComponent<PhaseInteraction>().toggleChildrenSolidity(forward);
+                        if (children[i].transform.GetChild(k).GetComponent<PhaseInteraction>() != null) {
+                           children[i].transform.GetChild(k).GetComponent<PhaseInteraction>().toggleChildrenSolidity(forward);
+                        }
                     }
                 }
             }

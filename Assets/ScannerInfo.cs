@@ -13,6 +13,6 @@ public class ScannerInfo : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        InfoPane.gameObject.SetActive(gameObject.GetComponentInParent<PhaseInteraction>().solid);
+        InfoPane.enabled = gameObject.GetComponentInParent<PhaseInteraction>().solid;
 	}
 }

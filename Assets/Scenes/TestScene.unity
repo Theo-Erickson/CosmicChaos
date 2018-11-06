@@ -159,10 +159,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visible: 1
   solid: 1
-  solidMaterial: {fileID: 2100000, guid: 61acaca9c10b0c64b97b79f64ce8f8dd, type: 2}
-  nonSolidMaterial: {fileID: 2100000, guid: 9140b85c64544b848aa8afd343d19f49, type: 2}
   player: {fileID: 0}
-  enableOnClick: 0
+  clickable: 1
+  solidMaterialAlpha: 0
+  transparentMaterialAlpha: 0.5
 --- !u!65 &36649909
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -360,10 +360,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visible: 1
   solid: 1
-  solidMaterial: {fileID: 0}
-  nonSolidMaterial: {fileID: 0}
   player: {fileID: 0}
-  enableOnClick: 0
+  clickable: 1
+  solidMaterialAlpha: 0
+  transparentMaterialAlpha: 0.5
 --- !u!135 &59673274
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -658,10 +658,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visible: 1
   solid: 1
-  solidMaterial: {fileID: 2100000, guid: 61acaca9c10b0c64b97b79f64ce8f8dd, type: 2}
-  nonSolidMaterial: {fileID: 2100000, guid: 9140b85c64544b848aa8afd343d19f49, type: 2}
   player: {fileID: 0}
-  enableOnClick: 0
+  clickable: 1
+  solidMaterialAlpha: 0
+  transparentMaterialAlpha: 0.5
 --- !u!65 &106614977
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1083,7 +1083,7 @@ GameObject:
   - component: {fileID: 166809998}
   m_Layer: 0
   m_Name: Red Cube (2)
-  m_TagString: Untagged
+  m_TagString: phased
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1114,10 +1114,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visible: 1
   solid: 1
-  solidMaterial: {fileID: 2100000, guid: 61acaca9c10b0c64b97b79f64ce8f8dd, type: 2}
-  nonSolidMaterial: {fileID: 2100000, guid: 9140b85c64544b848aa8afd343d19f49, type: 2}
   player: {fileID: 0}
-  enableOnClick: 0
+  clickable: 1
+  solidMaterialAlpha: 1
+  transparentMaterialAlpha: 0.5
 --- !u!65 &166809999
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1145,7 +1145,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 9140b85c64544b848aa8afd343d19f49, type: 2}
+  - {fileID: 2100000, guid: 61acaca9c10b0c64b97b79f64ce8f8dd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1393,10 +1393,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visible: 1
   solid: 1
-  solidMaterial: {fileID: 0}
-  nonSolidMaterial: {fileID: 0}
   player: {fileID: 0}
-  enableOnClick: 0
+  clickable: 1
+  solidMaterialAlpha: 0
+  transparentMaterialAlpha: 0.5
 --- !u!65 &222003371
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1529,7 +1529,7 @@ GameObject:
   - component: {fileID: 313802511}
   m_Layer: 0
   m_Name: Red Cube (3)
-  m_TagString: Untagged
+  m_TagString: phased
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1560,10 +1560,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visible: 1
   solid: 1
-  solidMaterial: {fileID: 2100000, guid: 61acaca9c10b0c64b97b79f64ce8f8dd, type: 2}
-  nonSolidMaterial: {fileID: 2100000, guid: 9140b85c64544b848aa8afd343d19f49, type: 2}
   player: {fileID: 0}
-  enableOnClick: 0
+  clickable: 1
+  solidMaterialAlpha: 1
+  transparentMaterialAlpha: 0.5
 --- !u!65 &313802512
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1591,7 +1591,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 9140b85c64544b848aa8afd343d19f49, type: 2}
+  - {fileID: 2100000, guid: 61acaca9c10b0c64b97b79f64ce8f8dd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1745,10 +1745,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visible: 1
   solid: 0
-  solidMaterial: {fileID: 2100000, guid: 61acaca9c10b0c64b97b79f64ce8f8dd, type: 2}
-  nonSolidMaterial: {fileID: 2100000, guid: 9140b85c64544b848aa8afd343d19f49, type: 2}
   player: {fileID: 0}
-  enableOnClick: 1
+  clickable: 1
+  solidMaterialAlpha: 0
+  transparentMaterialAlpha: 0.5
 --- !u!135 &354508199
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1935,7 +1935,7 @@ GameObject:
   - component: {fileID: 437522512}
   m_Layer: 0
   m_Name: Blue Cube (3)
-  m_TagString: Untagged
+  m_TagString: phased
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1966,10 +1966,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visible: 1
   solid: 1
-  solidMaterial: {fileID: 2100000, guid: 11023877c2a871d4fb0303bf85219dd2, type: 2}
-  nonSolidMaterial: {fileID: 2100000, guid: 58cb669ea6fadc245ad40ae100e1bc47, type: 2}
   player: {fileID: 0}
-  enableOnClick: 0
+  clickable: 1
+  solidMaterialAlpha: 1
+  transparentMaterialAlpha: 0.5
 --- !u!65 &437522513
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1997,7 +1997,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 58cb669ea6fadc245ad40ae100e1bc47, type: 2}
+  - {fileID: 2100000, guid: 11023877c2a871d4fb0303bf85219dd2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2176,10 +2176,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visible: 1
   solid: 1
-  solidMaterial: {fileID: 2100000, guid: 61acaca9c10b0c64b97b79f64ce8f8dd, type: 2}
-  nonSolidMaterial: {fileID: 2100000, guid: 9140b85c64544b848aa8afd343d19f49, type: 2}
   player: {fileID: 0}
-  enableOnClick: 0
+  clickable: 1
+  solidMaterialAlpha: 0
+  transparentMaterialAlpha: 0.5
 --- !u!65 &516330745
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2310,10 +2310,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visible: 1
   solid: 1
-  solidMaterial: {fileID: 0}
-  nonSolidMaterial: {fileID: 0}
   player: {fileID: 0}
-  enableOnClick: 0
+  clickable: 1
+  solidMaterialAlpha: 0
+  transparentMaterialAlpha: 0.5
 --- !u!65 &583462672
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2528,7 +2528,7 @@ GameObject:
   - component: {fileID: 644499227}
   m_Layer: 0
   m_Name: Blue Cube (2)
-  m_TagString: Untagged
+  m_TagString: phased
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2559,10 +2559,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visible: 1
   solid: 1
-  solidMaterial: {fileID: 2100000, guid: 11023877c2a871d4fb0303bf85219dd2, type: 2}
-  nonSolidMaterial: {fileID: 2100000, guid: 58cb669ea6fadc245ad40ae100e1bc47, type: 2}
   player: {fileID: 0}
-  enableOnClick: 0
+  clickable: 1
+  solidMaterialAlpha: 1
+  transparentMaterialAlpha: 0.5
 --- !u!65 &644499228
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2590,7 +2590,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 58cb669ea6fadc245ad40ae100e1bc47, type: 2}
+  - {fileID: 2100000, guid: 11023877c2a871d4fb0303bf85219dd2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3281,10 +3281,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visible: 1
   solid: 1
-  solidMaterial: {fileID: 0}
-  nonSolidMaterial: {fileID: 0}
   player: {fileID: 0}
-  enableOnClick: 0
+  clickable: 1
+  solidMaterialAlpha: 0
+  transparentMaterialAlpha: 0.5
 --- !u!135 &899134482
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -3405,10 +3405,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visible: 1
   solid: 1
-  solidMaterial: {fileID: 2100000, guid: 11023877c2a871d4fb0303bf85219dd2, type: 2}
-  nonSolidMaterial: {fileID: 2100000, guid: 58cb669ea6fadc245ad40ae100e1bc47, type: 2}
   player: {fileID: 0}
-  enableOnClick: 0
+  clickable: 1
+  solidMaterialAlpha: 0
+  transparentMaterialAlpha: 0.5
 --- !u!65 &901786903
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3624,10 +3624,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visible: 1
   solid: 1
-  solidMaterial: {fileID: 0}
-  nonSolidMaterial: {fileID: 0}
   player: {fileID: 0}
-  enableOnClick: 0
+  clickable: 1
+  solidMaterialAlpha: 0
+  transparentMaterialAlpha: 0.5
 --- !u!65 &904047598
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3696,7 +3696,7 @@ GameObject:
   - component: {fileID: 905014777}
   m_Layer: 0
   m_Name: Blue Cube (1)
-  m_TagString: Untagged
+  m_TagString: phased
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3727,10 +3727,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visible: 1
   solid: 1
-  solidMaterial: {fileID: 2100000, guid: 11023877c2a871d4fb0303bf85219dd2, type: 2}
-  nonSolidMaterial: {fileID: 2100000, guid: 58cb669ea6fadc245ad40ae100e1bc47, type: 2}
   player: {fileID: 0}
-  enableOnClick: 0
+  clickable: 1
+  solidMaterialAlpha: 1
+  transparentMaterialAlpha: 0.5
 --- !u!65 &905014778
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3758,7 +3758,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 58cb669ea6fadc245ad40ae100e1bc47, type: 2}
+  - {fileID: 2100000, guid: 11023877c2a871d4fb0303bf85219dd2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4050,10 +4050,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visible: 1
   solid: 1
-  solidMaterial: {fileID: 2100000, guid: 61acaca9c10b0c64b97b79f64ce8f8dd, type: 2}
-  nonSolidMaterial: {fileID: 2100000, guid: 9140b85c64544b848aa8afd343d19f49, type: 2}
   player: {fileID: 0}
-  enableOnClick: 1
+  clickable: 1
+  solidMaterialAlpha: 0
+  transparentMaterialAlpha: 0.5
 --- !u!4 &1004263791 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4901584586457372, guid: a5d7c050b985d0d478d47a08cdcdbe8e,
@@ -4113,6 +4113,20 @@ Prefab:
       propertyPath: visible
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1238949128668044, guid: 9b2195660183e2248a440069c43012c2, type: 2}
+      propertyPath: m_TagString
+      value: phased
+      objectReference: {fileID: 0}
+    - target: {fileID: 23447755811827116, guid: 9b2195660183e2248a440069c43012c2,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 61acaca9c10b0c64b97b79f64ce8f8dd, type: 2}
+    - target: {fileID: 114375263557772958, guid: 9b2195660183e2248a440069c43012c2,
+        type: 2}
+      propertyPath: solidMaterialAlpha
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9b2195660183e2248a440069c43012c2, type: 2}
   m_IsPrefabAsset: 0
@@ -4162,10 +4176,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visible: 1
   solid: 1
-  solidMaterial: {fileID: 2100000, guid: 11023877c2a871d4fb0303bf85219dd2, type: 2}
-  nonSolidMaterial: {fileID: 2100000, guid: 58cb669ea6fadc245ad40ae100e1bc47, type: 2}
   player: {fileID: 0}
-  enableOnClick: 0
+  clickable: 1
+  solidMaterialAlpha: 0
+  transparentMaterialAlpha: 0.5
 --- !u!65 &1040175475
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4289,7 +4303,7 @@ GameObject:
   - component: {fileID: 1062142204}
   m_Layer: 0
   m_Name: Red Cube (1)
-  m_TagString: Untagged
+  m_TagString: phased
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4320,10 +4334,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visible: 1
   solid: 1
-  solidMaterial: {fileID: 2100000, guid: 61acaca9c10b0c64b97b79f64ce8f8dd, type: 2}
-  nonSolidMaterial: {fileID: 2100000, guid: 9140b85c64544b848aa8afd343d19f49, type: 2}
   player: {fileID: 0}
-  enableOnClick: 0
+  clickable: 1
+  solidMaterialAlpha: 1
+  transparentMaterialAlpha: 0.5
 --- !u!65 &1062142205
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4351,7 +4365,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 9140b85c64544b848aa8afd343d19f49, type: 2}
+  - {fileID: 2100000, guid: 61acaca9c10b0c64b97b79f64ce8f8dd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4657,10 +4671,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visible: 1
   solid: 1
-  solidMaterial: {fileID: 2100000, guid: 61acaca9c10b0c64b97b79f64ce8f8dd, type: 2}
-  nonSolidMaterial: {fileID: 2100000, guid: 9140b85c64544b848aa8afd343d19f49, type: 2}
   player: {fileID: 0}
-  enableOnClick: 1
+  clickable: 1
+  solidMaterialAlpha: 0
+  transparentMaterialAlpha: 0.5
 --- !u!1 &1192343807
 GameObject:
   m_ObjectHideFlags: 0
@@ -4844,6 +4858,16 @@ Prefab:
       propertyPath: solid
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 23417951061549694, guid: a5d7c050b985d0d478d47a08cdcdbe8e,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 11023877c2a871d4fb0303bf85219dd2, type: 2}
+    - target: {fileID: 114506999336441426, guid: a5d7c050b985d0d478d47a08cdcdbe8e,
+        type: 2}
+      propertyPath: solidMaterialAlpha
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a5d7c050b985d0d478d47a08cdcdbe8e, type: 2}
   m_IsPrefabAsset: 0
@@ -4893,10 +4917,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visible: 1
   solid: 1
-  solidMaterial: {fileID: 2100000, guid: 61acaca9c10b0c64b97b79f64ce8f8dd, type: 2}
-  nonSolidMaterial: {fileID: 2100000, guid: 9140b85c64544b848aa8afd343d19f49, type: 2}
   player: {fileID: 0}
-  enableOnClick: 0
+  clickable: 1
+  solidMaterialAlpha: 0
+  transparentMaterialAlpha: 0.5
 --- !u!65 &1321822893
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5170,10 +5194,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visible: 1
   solid: 1
-  solidMaterial: {fileID: 0}
-  nonSolidMaterial: {fileID: 0}
   player: {fileID: 0}
-  enableOnClick: 0
+  clickable: 1
+  solidMaterialAlpha: 0
+  transparentMaterialAlpha: 0.5
 --- !u!65 &1417057248
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5294,10 +5318,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visible: 1
   solid: 1
-  solidMaterial: {fileID: 0}
-  nonSolidMaterial: {fileID: 0}
   player: {fileID: 0}
-  enableOnClick: 0
+  clickable: 1
+  solidMaterialAlpha: 0
+  transparentMaterialAlpha: 0.5
 --- !u!65 &1441399497
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5509,10 +5533,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visible: 1
   solid: 1
-  solidMaterial: {fileID: 2100000, guid: 11023877c2a871d4fb0303bf85219dd2, type: 2}
-  nonSolidMaterial: {fileID: 2100000, guid: 58cb669ea6fadc245ad40ae100e1bc47, type: 2}
   player: {fileID: 0}
-  enableOnClick: 0
+  clickable: 1
+  solidMaterialAlpha: 0
+  transparentMaterialAlpha: 0.5
 --- !u!65 &1567705839
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5775,10 +5799,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visible: 1
   solid: 1
-  solidMaterial: {fileID: 0}
-  nonSolidMaterial: {fileID: 0}
   player: {fileID: 0}
-  enableOnClick: 0
+  clickable: 1
+  solidMaterialAlpha: 0
+  transparentMaterialAlpha: 0.5
 --- !u!65 &1686975304
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5851,18 +5875,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!65 &1735283013
-BoxCollider:
+--- !u!114 &1735283013
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1735283012}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74d21e2b95f9684469ab6a2584b5803a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  visible: 0
+  solid: 0
+  player: {fileID: 0}
+  clickable: 1
+  solidMaterialAlpha: 0
+  transparentMaterialAlpha: 0.5
 --- !u!23 &1735283014
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -6047,10 +6076,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visible: 1
   solid: 1
-  solidMaterial: {fileID: 2100000, guid: 11023877c2a871d4fb0303bf85219dd2, type: 2}
-  nonSolidMaterial: {fileID: 2100000, guid: 58cb669ea6fadc245ad40ae100e1bc47, type: 2}
   player: {fileID: 0}
-  enableOnClick: 0
+  clickable: 1
+  solidMaterialAlpha: 0
+  transparentMaterialAlpha: 0.5
 --- !u!65 &1777159399
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6281,10 +6310,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visible: 1
   solid: 1
-  solidMaterial: {fileID: 0}
-  nonSolidMaterial: {fileID: 0}
   player: {fileID: 0}
-  enableOnClick: 0
+  clickable: 1
+  solidMaterialAlpha: 0
+  transparentMaterialAlpha: 0.5
 --- !u!65 &1906714227
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6507,10 +6536,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visible: 1
   solid: 1
-  solidMaterial: {fileID: 0}
-  nonSolidMaterial: {fileID: 0}
   player: {fileID: 0}
-  enableOnClick: 0
+  clickable: 1
+  solidMaterialAlpha: 0
+  transparentMaterialAlpha: 0.5
 --- !u!65 &1952446145
 BoxCollider:
   m_ObjectHideFlags: 0

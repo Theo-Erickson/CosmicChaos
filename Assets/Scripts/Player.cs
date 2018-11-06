@@ -35,12 +35,7 @@ public class Player : MonoBehaviour {
         }
 
         if (Input.GetKeyDown(KeyCode.LeftShift)) {
-            List<GameObject> children = new List<GameObject>();
-            //get all the children of the otherWorld.
-            for (int i = 0; i < otherWorld.transform.childCount; i++) {
-                children.Add(otherWorld.transform.GetChild(i).gameObject);
-                children[0].GetComponent<PhaseInteraction>().toggleMySolidity();
-            }
+            StartCoroutine(otherWorld.GetComponent<PhaseInteraction>().toggleChildrenSolidity(0.5f));
             
         }
     }

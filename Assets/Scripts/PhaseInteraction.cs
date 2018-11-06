@@ -5,14 +5,18 @@ using UnityEngine;
 public class PhaseInteraction : MonoBehaviour {
     public bool visible;
     public bool solid;
-    public Material solidMaterial;
-    public Material nonSolidMaterial;
-
+    
     public GameObject player;
-    public bool enableOnClick = true;
+    public bool clickable = true;
+
+    public float solidMaterialAlpha = 1.0f;
+    public float transparentMaterialAlpha = 0.5f;
+
+    private float oldMaterialAlpha; 
 
 	// Use this for initialization
 	void Start () {
+        CheckVisbility();
         player = GameObject.Find("Player");
     }
 	
@@ -23,17 +27,23 @@ public class PhaseInteraction : MonoBehaviour {
 
     void OnMouseOver() {
         if (Input.GetMouseButtonDown(0)) {
-            if (enableOnClick) {
+            if (clickable) {
                 print("toggle solid");
                 toggleMySolidity();
             }
         }
         if (Input.GetMouseButtonDown(1)) {
-            if (enableOnClick) {
+            if (clickable) {
                 print("toggle child solidity");
-                toggleChildrenSolidity(true);
+                StartCoroutine(toggleChildrenSolidity(0.5f));
             }
         }
+    }
+
+    public void ChangeAlpha(Material mat, float alphaValue) {
+        Color oldColor = mat.color;
+        Color newColor = new Color(oldColor.r, oldColor.g, oldColor.b, alphaValue);
+        mat.SetColor("_Color", newColor);
     }
 
 
@@ -49,7 +59,7 @@ public class PhaseInteraction : MonoBehaviour {
         //can it be touched?
         //NOTE: For clicking interactions, we need a collider of some sort, hence why we are setting the colliders to triggers and not disabling
         if (solid) {
-            GetComponent<Renderer>().material = solidMaterial;
+            ChangeAlpha(GetComponent<Renderer>().material, transparentMaterialAlpha);
 
             if (this.GetComponent<BoxCollider>()) {
                 GetComponent<BoxCollider>().isTrigger = false;
@@ -62,7 +72,7 @@ public class PhaseInteraction : MonoBehaviour {
             }
 
         } else {
-            GetComponent<Renderer>().material = nonSolidMaterial;
+            ChangeAlpha(GetComponent<Renderer>().material, solidMaterialAlpha);
 
             if (this.GetComponent<BoxCollider>()) {
                 GetComponent<BoxCollider>().isTrigger = true;
@@ -105,150 +115,55 @@ public class PhaseInteraction : MonoBehaviour {
 
 
     public void toggleChildrenBoth(bool forward) {
-        toggleChildrenSolidity(forward);
-        toggleChildrenVisibility(forward);
+        StartCoroutine(toggleChildrenSolidity(0.5f));
+        toggleChildrenVisibility();
     }
 
-    public void toggleChildrenVisibility(bool forward) {
-        print("change children visibility phase: " + this.transform.name);
-        //if this object has no parent
-        if (this.transform.parent == null) {
-            //this has no parent and no children. IE it is a singleton
-            if (this.transform.childCount == 0) {
-                toggleMyVisibility();
-            //this IS the parent AND it has children. WHEN IT COMES TO THESE OBJECTS... YOU ARE THE FATHER!!!
-            } else {
-                List<GameObject> children = new List<GameObject>();
-                for (int i = 0; i < this.transform.childCount; i++) {
-                    children.Add(this.transform.GetChild(i).gameObject);
-                }
 
-                //change them all one by one
-                StartCoroutine(toggleObjectsVisibilityOverTime(children, forward, 0.2f));
-
-            }
-
-        //you do have a parent
-        } else {
-            //get all other objects in grouped with it
+    public IEnumerator toggleChildrenSolidity(float delay) {
+        yield return new WaitForSeconds(delay);
+        if (this.transform.childCount > 0) {
             List<GameObject> children = new List<GameObject>();
-            for (int i = 0; i < this.transform.parent.childCount; i++) {
-                children.Add(this.transform.parent.GetChild(i).gameObject);
-            }
-
-            //change them all one by one
-            StartCoroutine(toggleObjectsVisibilityOverTime(children, forward, 0.2f));
-        }
-    }
-
-    public void toggleChildrenSolidity(bool forward) {
-        //print("change children solidity phase: " + this.transform.name);
-        //if thos object has no parent
-        if (this.transform.parent == null) {
-            //no parent no children
-            if (this.transform.childCount == 0) {
-                print("change my solidity");
-                StartCoroutine(toggleMySolidityOverTime(0.2f));
-                //you have children
-            } else {
-                List<GameObject> children = new List<GameObject>();
-                //get all other objects grouped with it
-                for (int i = 0; i < this.transform.childCount; i++) {
-                    children.Add(this.transform.GetChild(i).gameObject);
-                    if (children[i].transform.childCount > 0) {
-                        for (int k = 0; k < children[i].transform.childCount; k++) {
-                            if (children[i].transform.GetChild(k).GetComponent<PhaseInteraction>() != null) {
-                                children[i].transform.GetChild(k).GetComponent<PhaseInteraction>().toggleChildrenSolidity(forward);
-                            }
-                        }
-                    }
-                }
-                StartCoroutine(toggleObjectsSolidityOverTime(children, forward, 0.2f));
-            }
-
-        } else {
-            
-            List<GameObject> children = new List<GameObject>();
-            //get all other objects grouped with it
-            for (int i = 0; i < this.transform.parent.childCount; i++) {
-                children.Add(this.transform.parent.GetChild(i).gameObject);
+            for (int i = 0; i < this.transform.childCount; i++) {
+                children.Add(this.transform.GetChild(i).gameObject);
                 if (children[i].transform.childCount > 0) {
-                    for (int k = 0; k < children[i].transform.childCount; k++) {
-                        if (children[i].transform.GetChild(k).GetComponent<PhaseInteraction>() != null) {
-                           children[i].transform.GetChild(k).GetComponent<PhaseInteraction>().toggleChildrenSolidity(forward);
-                        }
-                    }
+                    StartCoroutine(children[i].GetComponent<PhaseInteraction>().toggleChildrenSolidity(0.5f));
+                }
+                if (children[i].GetComponent<PhaseInteraction>() != null) {
+                    StartCoroutine(children[i].GetComponent<PhaseInteraction>().toggleMySolidityOverTime(0.2f));
                 }
             }
-            StartCoroutine(toggleObjectsSolidityOverTime(children, forward, 0.2f));
-
-            /*
-            if (this.transform.childCount == 0) {
-                print("do I get here");
-                StartCoroutine(toggleMySolidityOverTime(0.2f));
-            }
-            */
-
+        } else {
+            StartCoroutine(toggleMySolidityOverTime(0.2f));
+            //toggle your Solidity
         }
     }
 
+    public void toggleChildrenVisibility() {
+        if (this.transform.childCount > 0) {
+            List<GameObject> children = new List<GameObject>();
+            for (int i = 0; i < this.transform.childCount; i++) {
+                children.Add(this.transform.GetChild(i).gameObject);
+                if (children[i].transform.childCount > 0) {
+                    children[i].GetComponent<PhaseInteraction>().toggleChildrenVisibility();
+                }
+                if (children[i].GetComponent<PhaseInteraction>() != null) {
+                    StartCoroutine(children[i].GetComponent<PhaseInteraction>().toggleMyVisibilityOverTime(0.2f));
+                }
+            }
+        } else {
+            StartCoroutine(toggleMyVisibilityOverTime(0.2f));
+            //toggle your Solidity
+        }
+    }
 
     public IEnumerator toggleMySolidityOverTime(float delay) {
         yield return new WaitForSeconds(delay);
-        toggleMySolidity();
+        this.solid = !this.solid;
     }
 
     public IEnumerator toggleMyVisibilityOverTime(float delay) {
         yield return new WaitForSeconds(delay);
-        toggleMyVisibility();
+        this.visible = !this.visible;
     }
-
-    public IEnumerator toggleObjectsSolidityOverTime(List<GameObject> objects, bool forward, float decayTime) {
-        yield return new WaitForSeconds(decayTime);
-        if (forward) {
-            if (objects[0].GetComponent<PhaseInteraction>() != null) {
-                objects[0].GetComponent<PhaseInteraction>().solid = !objects[0].GetComponent<PhaseInteraction>().solid;
-            }
-            //recursion
-            if (objects.Count > 1) {
-                objects.RemoveAt(0);
-                StartCoroutine(toggleObjectsSolidityOverTime(objects, forward, decayTime));
-            }
-        } else {
-            if (objects[objects.Count - 1].GetComponent<PhaseInteraction>() != null) {
-                objects[objects.Count - 1].GetComponent<PhaseInteraction>().solid = !objects[objects.Count - 1].GetComponent<PhaseInteraction>().solid;
-            }
-            //recursion
-            if (objects.Count > 1) {
-                objects.RemoveAt(objects.Count - 1);
-                StartCoroutine(toggleObjectsSolidityOverTime(objects, forward, decayTime));
-            }
-        }
-    }
-
-    public IEnumerator toggleObjectsVisibilityOverTime(List<GameObject> objects, bool forward, float decayTime) {
-        yield return new WaitForSeconds(decayTime);
-        if (forward) {
-            if (objects[0].GetComponent<PhaseInteraction>() != null) {
-                objects[0].GetComponent<PhaseInteraction>().visible = !objects[0].GetComponent<PhaseInteraction>().visible;
-            }
-            //recursion
-            if (objects.Count > 1) {
-                objects.RemoveAt(0);
-                StartCoroutine(toggleObjectsVisibilityOverTime(objects, forward, decayTime));
-            }
-        } else {
-            if (objects[objects.Count - 1].GetComponent<PhaseInteraction>() != null) {
-                objects[objects.Count - 1].GetComponent<PhaseInteraction>().visible = !objects[objects.Count - 1].GetComponent<PhaseInteraction>().visible;
-            }
-            //recursion
-            if (objects.Count > 1) {
-                objects.RemoveAt(objects.Count - 1);
-                StartCoroutine(toggleObjectsVisibilityOverTime(objects, forward, decayTime));
-            }
-        }
-    }
-
-
-
 }

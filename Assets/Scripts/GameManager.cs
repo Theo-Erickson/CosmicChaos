@@ -14,8 +14,7 @@ public class GameManager : MonoBehaviour {
 
     }
 
-    void Update() {
-        scannerType.text = player.GetComponentInChildren<DetectionPulse>().Mode.ToString();    
+    void Update() {    
     }
 
 

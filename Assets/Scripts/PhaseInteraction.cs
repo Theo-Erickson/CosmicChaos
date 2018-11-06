@@ -2,29 +2,42 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Anything that can shift needs this class
 public class PhaseInteraction : MonoBehaviour {
+    //determines whether or not to render an object
     public bool visible;
+
+    //non-solid objects will be transparent and can be walked through. Solid ones will appear opaque and will collide
     public bool solid;
-    
+
+    //this is here for if any future script wants to check which world this object belongs to.
+    //At the moment, this is not used for any code, but rather to just keep track of things
+    public int worldAllegiance;
+
     public GameObject player;
+    //can you click on this to do something. SEE void OnMouseOver()
     public bool clickable = true;
 
     public float solidMaterialAlpha = 1.0f;
+    //when this.solid = false, show texture slightly transparent
     public float transparentMaterialAlpha = 0.5f;
-
-    private float oldMaterialAlpha; 
 
 	// Use this for initialization
 	void Start () {
-        CheckVisbility();
+        if (GetComponent<Renderer>()) {
+            CheckVisbility();
+        }
         player = GameObject.Find("Player");
     }
 	
 	// Update is called once per frame
 	void Update () {
-        CheckVisbility();
+        if (GetComponent<Renderer>()) {
+            CheckVisbility();
+        }
     }
 
+    //trigger fires when you mouse over something that has a collider
     void OnMouseOver() {
         if (Input.GetMouseButtonDown(0)) {
             if (clickable) {
@@ -40,13 +53,14 @@ public class PhaseInteraction : MonoBehaviour {
         }
     }
 
+    //change transparency of this material
     public void ChangeAlpha(Material mat, float alphaValue) {
         Color oldColor = mat.color;
         Color newColor = new Color(oldColor.r, oldColor.g, oldColor.b, alphaValue);
         mat.SetColor("_Color", newColor);
     }
 
-
+    //determine whether this object should be [not rendered vs solid] or [transparent vs full]
     public void CheckVisbility() {
         //can it be seen
         if (visible) {
@@ -86,6 +100,7 @@ public class PhaseInteraction : MonoBehaviour {
         }
     }
 
+    //modify the solidity and visibility of this
     public void setBoth(bool solidity, bool visibility) {
         setSolidity(solidity);
         setVisibility(visible);
@@ -120,6 +135,7 @@ public class PhaseInteraction : MonoBehaviour {
     }
 
 
+    //for all the children of this object, toggle their solidity one by one
     public IEnumerator toggleChildrenSolidity(float delay) {
         yield return new WaitForSeconds(delay);
         if (this.transform.childCount > 0) {
@@ -139,6 +155,7 @@ public class PhaseInteraction : MonoBehaviour {
         }
     }
 
+    //for all children of this object, modify visibility one by one
     public void toggleChildrenVisibility() {
         if (this.transform.childCount > 0) {
             List<GameObject> children = new List<GameObject>();
@@ -165,5 +182,26 @@ public class PhaseInteraction : MonoBehaviour {
     public IEnumerator toggleMyVisibilityOverTime(float delay) {
         yield return new WaitForSeconds(delay);
         this.visible = !this.visible;
+    }
+
+    void OnTriggerEnter(Collider col) {
+        //if the player is in this object's trigger collider, stop them from shifting. This is to prevent the player from getting stuck
+        if (col.tag == "Player") {
+            col.gameObject.GetComponent<Player>().canShift = false;
+        }
+    }
+
+    void OnTriggerStay(Collider col) {
+        //if the player stays in this object's trigger collider, stop them from shifting. This is to help prevent edge cases
+        if (col.tag == "Player") {
+            col.gameObject.GetComponent<Player>().canShift = false;
+        }
+    }
+
+    void OnTriggerExit(Collider col) {
+        if (col.tag == "Player") {
+            //if the player is not in this object's trigger collider, re-enable shifting. This is because they are not in danger of trapping themselves or falling
+            col.gameObject.GetComponentInChildren<Player>().canShift = true;
+        }
     }
 }

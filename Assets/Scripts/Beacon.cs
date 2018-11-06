@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//This class is intended to manage activating a detection pulse on this object from affar
 public class Beacon : MonoBehaviour {
     public bool clickable = true;
 
@@ -19,15 +20,11 @@ public class Beacon : MonoBehaviour {
             this.GetComponent<Renderer>().material.color = Color.green;
         }
     }
-	
-	// Update is called once per frame
-	void Update() {
-	}
 
     void OnMouseOver() {
         if (Input.GetMouseButtonDown(0)) {
             if (clickable) {
-                dPulse.expanding = !dPulse.expanding;
+                dPulse.Activate();
             }
         }
         if (Input.GetMouseButtonDown(1)) {

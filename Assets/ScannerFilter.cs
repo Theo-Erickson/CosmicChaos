@@ -39,15 +39,11 @@ public class ScannerFilter : MonoBehaviour {
 	}
 
     void OnTriggerEnter(Collider col) {
-        if(col.tag == "phased") {
-            col.gameObject.GetComponent<PhaseInteraction>().setVisibility(true);
-        }
+        
     }
 
     void OnTriggerExit(Collider col) {
-        if (col.tag == "phased") {
-            col.gameObject.GetComponent<PhaseInteraction>().setVisibility(false);
-        }
+        
     }
 
 }

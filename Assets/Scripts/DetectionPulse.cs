@@ -3,18 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class DetectionPulse : MonoBehaviour {
+    public bool canPulse = true; //boolean to enable/disable your pulse
+
     public SphereCollider myCollider;
 
-    public float maxRange = 5.0f;
-    public float expandSpeed = 1.0f;
-    public float maxEnergy = 100;
-    public bool expanding = false;
-    public float startCost = 50;
-    public bool respondToKeyPress = false;
+    public float maxRange = 5.0f; //how big the pulse gets
+    public float expandSpeed = 1.0f; //how fast it gets there
+    public float maxEnergy = 100;  //how long the pulse can sustain itself
+    public bool expanding = false; //lets you know if the pulse is going out. Also works also as a "is this activated?" boolean
+    public float startCost = 50; //cost to activate it
+    public bool respondToKeyPress = false; //whether the pulse can be activated via key press
 
-    public GameObject visualizer;
+    public GameObject visualizer; //referrence to possible visualizer objects
 
-    public enum visOrSolidity{ visibility, solidity, both};
+    public enum visOrSolidity{ visibility, solidity, both};  //enum to keep track of what mode the scanner is in
     //shows in inspector
     public visOrSolidity Mode = 0;
 
@@ -32,7 +34,7 @@ public class DetectionPulse : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         if (respondToKeyPress && Input.GetKeyDown(KeyCode.RightShift) && energy > startCost) {
-            expanding = !expanding;
+            Activate();
         }
 
         //toggle modes and only do so when the scanner is off
@@ -76,6 +78,13 @@ public class DetectionPulse : MonoBehaviour {
         }
 	}
 
+    public void Activate() {
+        if (canPulse) {
+            expanding = !expanding;
+        }
+    }
+
+    //if your sphere collider hits something else
     void OnTriggerEnter(Collider col) {
         if (Mode == visOrSolidity.solidity) {
             print("enter Solidity");

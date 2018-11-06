@@ -10,6 +10,10 @@ public class PhaseInteraction : MonoBehaviour {
     //non-solid objects will be transparent and can be walked through. Solid ones will appear opaque and will collide
     public bool solid;
 
+    private bool defaultVisibility;
+
+    private bool defaultSolidity;
+
     //this is here for if any future script wants to check which world this object belongs to.
     //At the moment, this is not used for any code, but rather to just keep track of things
     public int worldAllegiance;
@@ -27,6 +31,8 @@ public class PhaseInteraction : MonoBehaviour {
         if (GetComponent<Renderer>()) {
             CheckVisbility();
         }
+        defaultSolidity = solid;
+        defaultVisibility = visible;
         player = GameObject.Find("Player");
     }
 	
@@ -73,7 +79,7 @@ public class PhaseInteraction : MonoBehaviour {
         //can it be touched?
         //NOTE: For clicking interactions, we need a collider of some sort, hence why we are setting the colliders to triggers and not disabling
         if (solid) {
-            ChangeAlpha(GetComponent<Renderer>().material, transparentMaterialAlpha);
+            ChangeAlpha(GetComponent<Renderer>().material, solidMaterialAlpha);
 
             if (this.GetComponent<BoxCollider>()) {
                 GetComponent<BoxCollider>().isTrigger = false;
@@ -86,7 +92,7 @@ public class PhaseInteraction : MonoBehaviour {
             }
 
         } else {
-            ChangeAlpha(GetComponent<Renderer>().material, solidMaterialAlpha);
+            ChangeAlpha(GetComponent<Renderer>().material, transparentMaterialAlpha);
 
             if (this.GetComponent<BoxCollider>()) {
                 GetComponent<BoxCollider>().isTrigger = true;
@@ -98,6 +104,22 @@ public class PhaseInteraction : MonoBehaviour {
                 GetComponent<CapsuleCollider>().isTrigger = true;
             }
         }
+    }
+
+    public void setDefaultSolidity() {
+        this.solid = defaultSolidity;
+    }
+
+    public void setDefaultVisibility() {
+        this.visible = defaultVisibility;
+    }
+
+    public void setNonDefaultSolidity() {
+        this.solid = !defaultSolidity;
+    }
+
+    public void setNonDefaultVisibility() {
+        this.visible = !defaultVisibility;
     }
 
     //modify the solidity and visibility of this
@@ -133,7 +155,6 @@ public class PhaseInteraction : MonoBehaviour {
         StartCoroutine(toggleChildrenSolidity(0.5f));
         toggleChildrenVisibility();
     }
-
 
     //for all the children of this object, toggle their solidity one by one
     public IEnumerator toggleChildrenSolidity(float delay) {

@@ -7,6 +7,7 @@ public class DetectionPulse : MonoBehaviour {
 
     public SphereCollider myCollider;
 
+    public bool infiniteEnergy = false;
     public float maxRange = 5.0f; //how big the pulse gets
     public float expandSpeed = 1.0f; //how fast it gets there
     public float maxEnergy = 100;  //how long the pulse can sustain itself
@@ -29,6 +30,10 @@ public class DetectionPulse : MonoBehaviour {
         myCollider = GetComponent<SphereCollider>();
         energy = maxEnergy;
         oldRadius = myCollider.radius;
+        if (infiniteEnergy) {
+            maxEnergy = -1f;
+            startCost = 0;
+        }
     }
 	
 	// Update is called once per frame
@@ -61,7 +66,7 @@ public class DetectionPulse : MonoBehaviour {
                 if (myCollider.radius <= maxRange) {
                     myCollider.radius += expandSpeed;
                 }
-                energy--;
+                if(!infiniteEnergy)energy--;
             } else {
                 expanding = false;
             }
@@ -89,34 +94,36 @@ public class DetectionPulse : MonoBehaviour {
         if (Mode == visOrSolidity.solidity) {
             print("enter Solidity");
             if (col.tag == "phased") {
-                col.gameObject.GetComponent<PhaseInteraction>().toggleMySolidity();
+                col.gameObject.GetComponent<PhaseInteraction>().setNonDefaultSolidity();
             }
         } else if(Mode == visOrSolidity.visibility){
             print("enter Visibility");
             if (col.tag == "phased") {
-                col.gameObject.GetComponent<PhaseInteraction>().toggleMyVisibility();
+                col.gameObject.GetComponent<PhaseInteraction>().setNonDefaultVisibility();
             }
         } else {
             if (col.tag == "phased") {
-                col.gameObject.GetComponent<PhaseInteraction>().toggleMyVisibility();
-                col.gameObject.GetComponent<PhaseInteraction>().toggleMySolidity();
+                col.gameObject.GetComponent<PhaseInteraction>().setNonDefaultSolidity();
+                col.gameObject.GetComponent<PhaseInteraction>().setNonDefaultVisibility();
             }
         }
     }
 
     void OnTriggerExit(Collider col) {
         if (Mode == visOrSolidity.solidity) {
+            print("enter Solidity");
             if (col.tag == "phased") {
-                col.gameObject.GetComponent<PhaseInteraction>().toggleMySolidity();
+                col.gameObject.GetComponent<PhaseInteraction>().setDefaultSolidity();
             }
         } else if (Mode == visOrSolidity.visibility) {
+            print("enter Visibility");
             if (col.tag == "phased") {
-                col.gameObject.GetComponent<PhaseInteraction>().toggleMyVisibility();
+                col.gameObject.GetComponent<PhaseInteraction>().setDefaultVisibility();
             }
         } else {
             if (col.tag == "phased") {
-                col.gameObject.GetComponent<PhaseInteraction>().toggleMyVisibility();
-                col.gameObject.GetComponent<PhaseInteraction>().toggleMySolidity();
+                col.gameObject.GetComponent<PhaseInteraction>().setDefaultSolidity();
+                col.gameObject.GetComponent<PhaseInteraction>().setDefaultVisibility();
             }
         }
     }

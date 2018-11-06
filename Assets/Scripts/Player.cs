@@ -42,7 +42,7 @@ public class Player : MonoBehaviour {
                 world1.GetComponent<PhaseInteraction>().toggleChildrenVisibility();
                 world2.GetComponent<PhaseInteraction>().toggleChildrenVisibility();
             }else {
-                StartCoroutine(DisplayFadingText("Middle", "Cannot Shift: Otherworldly Object Intererence", 1.0f));
+                StartCoroutine(DisplayFadingText("Middle", "Cannot Shift: Otherworldly Object Intererence", 2.0f));
             }
         }
 

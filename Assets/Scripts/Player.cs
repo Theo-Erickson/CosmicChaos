@@ -4,26 +4,38 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Player : MonoBehaviour {
+    [Header ("Movement")]
     public float moveSpeed = 1.0f;
+    [Tooltip("Whether the player can shift themselves")]
     public bool canShift = true;
 
+    [Header("Scanning")]
     public GameObject scannerFilter;
+    public bool aimingAtInteractibleThing = false;
 
+    [Header("World Switching")]
+    public int currentWorld = 1;
     public GameObject world1;
     public GameObject world2;
 
-    public Canvas GUI;
+    [Header("Object Referencing")]
+    public GameObject GUI;
     public DetectionPulse dPulse;
     public Vector3 respawnPoint;
+    public GameManager GM;
 
     // Use this for initialization
     private void Awake(){
+        GM = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     void Start () {
         //If you don't link it in the editor, it will try to find it where it expects it to be
-        if(GUI == null) { GameObject.Find("GUI").GetComponent<Canvas>(); }
-        if(dPulse == null) { GameObject.Find("Detection Sphere").GetComponent<DetectionPulse>(); }
+        if(GUI == null) { this.transform.Find("GUI"); }
+        if(dPulse == null) { this.transform.Find("Detection Sphere").GetComponent<DetectionPulse>(); }
+
+        if(world1 == null) { GameObject.Find("World 1"); }
+        if(world1 == null) { GameObject.Find("World 2"); }
 
         //initial spawn point
         respawnPoint = this.transform.position;
@@ -39,17 +51,27 @@ public class Player : MonoBehaviour {
         //only allow shifting if you canShift and are pression left shift. A lot of shifty bussiness going on here -_0
         if (Input.GetKeyDown(KeyCode.LeftShift)) {
             if (canShift) {
-                world1.GetComponent<PhaseInteraction>().toggleChildrenVisibility();
-                world2.GetComponent<PhaseInteraction>().toggleChildrenVisibility();
+                ShiftWorlds();
             }else {
                 StartCoroutine(DisplayFadingText("Middle", "Cannot Shift: Otherworldly Object Intererence", 2.0f));
             }
         }
 
-        GameObject.Find("Top Left").GetComponent<Text>().text = dPulse.Mode.ToString();
-            //.GetComponent<Text>().text = dPulse.Mode.ToString();
+        GUI.transform.Find("Top Left").GetComponent<Text>().text = dPulse.Mode.ToString();
+        //.GetComponent<Text>().text = dPulse.Mode.ToString();
 
+        if (GM.paused) {
+            DisplayText("Middle", "PAUSED");
+        } else {
+            DisplayText("Middle", "");
+        }
+    }
 
+    //
+    public void ShiftWorlds() {
+        if(currentWorld == 1) { currentWorld = 2; } else { currentWorld = 1; }
+        world1.GetComponent<PhaseInteraction>().toggleChildrenVisibility();
+        world2.GetComponent<PhaseInteraction>().toggleChildrenVisibility();
     }
 
     private void FixedUpdate() {
@@ -82,7 +104,7 @@ public class Player : MonoBehaviour {
 
     //just show the message
     public void DisplayText(string whichTextField, string whatToSay) {
-        GameObject.Find(whichTextField).GetComponent<Text>().text = whatToSay;
+        GUI.transform.Find(whichTextField).GetComponent<Text>().text = whatToSay;
     }
 
     //wait a little before showing message
@@ -99,9 +121,9 @@ public class Player : MonoBehaviour {
 
     //create a message at element whichTextField that says whatToSay and dissappears after some time
     public IEnumerator DisplayFadingText(string whichTextField, string whatToSay, float delayBeforeDissappearInSeconds) {
-        GameObject.Find(whichTextField).GetComponent<Text>().text = whatToSay;
+        GUI.transform.Find(whichTextField).GetComponent<Text>().text = whatToSay;
         yield return new WaitForSeconds(delayBeforeDissappearInSeconds);
-        GameObject.Find(whichTextField).GetComponent<Text>().text = "";
+        GUI.transform.Find(whichTextField).GetComponent<Text>().text = "";
     }
 
 }

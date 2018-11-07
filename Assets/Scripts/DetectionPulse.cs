@@ -3,17 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class DetectionPulse : MonoBehaviour {
+    [Header("Interactibility")]
+    [Tooltip("How the pulse can be activated and deactivated")]
     public bool canPulse = true; //boolean to enable/disable your pulse
+    [Tooltip("lets you know if the pulse is going out. Also works also as a \" is this activated ? \" boolean")]
+    public bool expanding = false;
+    [Tooltip("whether the pulse can be activated via key press")]
+    public bool respondToKeyPress = false;
 
     public SphereCollider myCollider;
 
+    [Header("Energy Values")]
     public bool infiniteEnergy = false;
+    public float maxEnergy = 100;  //how long the pulse can sustain itself
+    public float startCost = 50; //cost to activate it
+
+    [Header("Range Values")]
     public float maxRange = 5.0f; //how big the pulse gets
     public float expandSpeed = 1.0f; //how fast it gets there
-    public float maxEnergy = 100;  //how long the pulse can sustain itself
-    public bool expanding = false; //lets you know if the pulse is going out. Also works also as a "is this activated?" boolean
-    public float startCost = 50; //cost to activate it
-    public bool respondToKeyPress = false; //whether the pulse can be activated via key press
 
     public GameObject visualizer; //referrence to possible visualizer objects
 
@@ -80,6 +87,12 @@ public class DetectionPulse : MonoBehaviour {
             if ( energy < maxEnergy) {
                 energy++;
             }
+        }
+
+        if(myCollider.radius <= oldRadius) {
+            myCollider.enabled = false;
+        } else {
+            myCollider.enabled = true;
         }
 	}
 

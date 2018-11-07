@@ -6,16 +6,82 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
 
-    public Text scannerType;
     public GameObject player;
-    
+    public GameObject GUI;
+    public DetectionPulse playerPulse;
+
+    public static GameManager instance = null;
+
+    public bool paused = false;
+
+    private Player playerScript;
+
+    void Awake() {
+        /*
+        if (instance == null) {
+            instance = this;
+        } else if (instance != this) {
+            Destroy(this.gameObject);
+        }
+        */
+        if (player == null) { GameObject.Find("Player"); }
+        playerScript = player.GetComponent<Player>();
+        if (GUI == null) { GameObject.Find("GUI"); }
+        if (playerPulse == null) { player.GetComponentInChildren<DetectionPulse>(); }
+    }
 
     void Start() {
+        Object.DontDestroyOnLoad(this.gameObject);
+    }
+
+    void Update() {
+
+        LockCursor();
+        changeCursor();
 
     }
 
-    void Update() {    
+
+    public void LockCursor() {
+        if (!paused) {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        } else {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+            paused = !paused;
+        }
+        if (paused) {
+            Time.timeScale = 0;
+        } else {
+            Time.timeScale = 1;
+        }
     }
 
 
+    public void changeCursor() {
+        Image mainCursor = GUI.transform.Find("Reticle").GetComponent<Image>();
+        Image XCursor = GUI.transform.Find("X Overlay").GetComponent<Image>();
+        
+        if (playerScript.currentWorld == 1 && !playerPulse.expanding) {
+            mainCursor.sprite = Resources.Load<Sprite>("Cursors/Cursor 1");
+        }else if (playerScript.currentWorld == 1 && playerPulse.expanding) {
+            mainCursor.sprite = Resources.Load<Sprite>("Cursors/Cursor 2");
+        } else if (playerScript.currentWorld == 2 && !playerPulse.expanding) {
+            mainCursor.sprite = Resources.Load<Sprite>("Cursors/Cursor 3");
+        }else if (playerScript.currentWorld == 2 && playerPulse.expanding) {
+            mainCursor.sprite = Resources.Load<Sprite>("Cursors/Cursor 4");
+        }
+
+        if (playerScript.aimingAtInteractibleThing) {
+            XCursor.enabled = false;
+        } else {
+            XCursor.enabled = true;
+        }
+            
+
+    }
 }

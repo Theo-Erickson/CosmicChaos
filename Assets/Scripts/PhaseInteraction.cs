@@ -45,18 +45,23 @@ public class PhaseInteraction : MonoBehaviour {
 
     //trigger fires when you mouse over something that has a collider
     void OnMouseOver() {
-        if (Input.GetMouseButtonDown(0)) {
-            if (clickable) {
-                print("toggle solid");
+        //if you hover over something that you can see and click on
+        if (clickable && this.visible) {
+            //let player know they can interact with it
+            player.GetComponent<Player>().aimingAtInteractibleThing = true;
+            if (Input.GetMouseButtonDown(0)) {
                 toggleMySolidity();
             }
-        }
-        if (Input.GetMouseButtonDown(1)) {
-            if (clickable) {
-                print("toggle child solidity");
+            if (Input.GetMouseButtonDown(1)) {
                 StartCoroutine(toggleChildrenSolidity(0.5f));
             }
+        } else {
+            player.GetComponent<Player>().aimingAtInteractibleThing = false;
         }
+    }
+
+    void OnMouseExit() {
+        player.GetComponent<Player>().aimingAtInteractibleThing = false;
     }
 
     //change transparency of this material
@@ -204,6 +209,10 @@ public class PhaseInteraction : MonoBehaviour {
         yield return new WaitForSeconds(delay);
         this.visible = !this.visible;
     }
+
+
+
+
 
     void OnTriggerEnter(Collider col) {
         //if the player is in this object's trigger collider, stop them from shifting. This is to prevent the player from getting stuck

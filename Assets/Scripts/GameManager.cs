@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour {
 
     public GameObject player;
+<<<<<<< HEAD
     public GameObject GUI;
     public DetectionPulse playerPulse;
 
@@ -38,7 +39,15 @@ public class GameManager : MonoBehaviour {
 
         LockCursor();
         changeCursor();
+=======
 
+    private void Awake()
+    {
+        LockCursor();
+    }
+>>>>>>> 250eb96935059f3a0f3a4a0fc653033d9b86217c
+
+    void Start() {
     }
 
 
@@ -61,7 +70,15 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+    private void OnApplicationFocus(bool focus)
+    {
+        if(focus == true)
+        {
+            LockCursor();
+        }
+    }
 
+<<<<<<< HEAD
     public void changeCursor() {
         Image mainCursor = GUI.transform.Find("Reticle").GetComponent<Image>();
         Image XCursor = GUI.transform.Find("X Overlay").GetComponent<Image>();
@@ -83,5 +100,11 @@ public class GameManager : MonoBehaviour {
         }
             
 
+=======
+    private void LockCursor()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = true;
+>>>>>>> 250eb96935059f3a0f3a4a0fc653033d9b86217c
     }
 }

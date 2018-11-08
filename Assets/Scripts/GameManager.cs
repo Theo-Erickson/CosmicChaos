@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour {
 
     public GameObject player;
-<<<<<<< HEAD
     public GameObject GUI;
     public DetectionPulse playerPulse;
 
@@ -36,20 +35,9 @@ public class GameManager : MonoBehaviour {
     }
 
     void Update() {
-
         LockCursor();
         changeCursor();
-=======
-
-    private void Awake()
-    {
-        LockCursor();
     }
->>>>>>> 250eb96935059f3a0f3a4a0fc653033d9b86217c
-
-    void Start() {
-    }
-
 
     public void LockCursor() {
         if (!paused) {
@@ -70,26 +58,23 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    private void OnApplicationFocus(bool focus)
-    {
-        if(focus == true)
-        {
+    private void OnApplicationFocus(bool focus) {
+        if (focus == true) {
             LockCursor();
         }
     }
 
-<<<<<<< HEAD
     public void changeCursor() {
         Image mainCursor = GUI.transform.Find("Reticle").GetComponent<Image>();
         Image XCursor = GUI.transform.Find("X Overlay").GetComponent<Image>();
-        
+
         if (playerScript.currentWorld == 1 && !playerPulse.expanding) {
             mainCursor.sprite = Resources.Load<Sprite>("Cursors/Cursor 1");
-        }else if (playerScript.currentWorld == 1 && playerPulse.expanding) {
+        } else if (playerScript.currentWorld == 1 && playerPulse.expanding) {
             mainCursor.sprite = Resources.Load<Sprite>("Cursors/Cursor 2");
         } else if (playerScript.currentWorld == 2 && !playerPulse.expanding) {
             mainCursor.sprite = Resources.Load<Sprite>("Cursors/Cursor 3");
-        }else if (playerScript.currentWorld == 2 && playerPulse.expanding) {
+        } else if (playerScript.currentWorld == 2 && playerPulse.expanding) {
             mainCursor.sprite = Resources.Load<Sprite>("Cursors/Cursor 4");
         }
 
@@ -98,13 +83,5 @@ public class GameManager : MonoBehaviour {
         } else {
             XCursor.enabled = true;
         }
-            
-
-=======
-    private void LockCursor()
-    {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = true;
->>>>>>> 250eb96935059f3a0f3a4a0fc653033d9b86217c
     }
 }

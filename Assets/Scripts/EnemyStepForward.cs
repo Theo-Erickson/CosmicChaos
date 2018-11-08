@@ -10,10 +10,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyStepForward : MonoBehaviour {
-    [SerializeField] private GameObject aggroSpace; //An em
+    [SerializeField] private GameObject aggroSpace; //An empty object with a large box collider.
     [SerializeField] private float speed; //rate entity moves towards player
 
-
+    public int world; //world enemy will notice the player in
     public bool active; //if false enemy does nothing
     public GameObject player;
     private float minDistanceFromPlayer = 1.5f; //Without this will move inside player/push player around
@@ -33,9 +33,10 @@ public class EnemyStepForward : MonoBehaviour {
         {
             bool playerInAggroSpace = aggroSpace.GetComponent<AggroSpace>().playerInside;
             float distanceFromPlayer = Vector3.Distance(player.transform.position, transform.position);
+            int playerWorld = player.GetComponent<Player>().currentWorld;
 
-            //checks if player is in AggroRange and is not too close
-            if (playerInAggroSpace && distanceFromPlayer >= minDistanceFromPlayer)
+            //checks if player is in AggroRange in the same world and is not too close
+            if (playerInAggroSpace && world == playerWorld && distanceFromPlayer >= minDistanceFromPlayer)
             { 
                 //Move object towards player.
                 transform.position = Vector3.MoveTowards(transform.position, player.transform.position, step);

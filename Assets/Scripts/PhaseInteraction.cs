@@ -50,9 +50,11 @@ public class PhaseInteraction : MonoBehaviour {
             //let player know they can interact with it
             player.GetComponent<Player>().aimingAtInteractibleThing = true;
             if (Input.GetMouseButtonDown(0)) {
+                print(this.gameObject.name+": click change");
                 toggleMySolidity();
             }
             if (Input.GetMouseButtonDown(1)) {
+                print("clock change children of: "+this.gameObject.name);
                 StartCoroutine(toggleChildrenSolidity(0.5f));
             }
         } else {

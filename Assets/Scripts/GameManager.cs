@@ -51,6 +51,16 @@ public class GameManager : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Escape)) {
             paused = !paused;
         }
+
+        //release cursor but keep game running
+        if (Input.GetKeyDown(KeyCode.Tab) && Cursor.lockState != CursorLockMode.None) {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }else if (Input.GetKeyDown(KeyCode.Tab)) {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+
         if (paused) {
             Time.timeScale = 0;
         } else {

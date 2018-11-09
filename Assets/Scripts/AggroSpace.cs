@@ -19,7 +19,6 @@ public class AggroSpace : MonoBehaviour{
     private void OnTriggerStay(Collider other) {
         if (other.tag == "Player") {
             playerInside = true;
-            Debug.Log("player entered");
         }
     }
 

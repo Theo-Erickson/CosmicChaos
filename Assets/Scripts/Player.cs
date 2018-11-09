@@ -14,6 +14,7 @@ public class Player : MonoBehaviour {
     public bool aimingAtInteractibleThing = false;
 
     [Header("World Switching")]
+    public KeyCode shiftWorldKey = KeyCode.LeftShift;
     public int currentWorld = 1;
     public GameObject world1;
     public GameObject world2;
@@ -23,6 +24,8 @@ public class Player : MonoBehaviour {
     public DetectionPulse dPulse;
     public Vector3 respawnPoint;
     public GameManager GM;
+    public KeyCode pauseKey = KeyCode.Escape;
+
 
     // Use this for initialization
     private void Awake(){
@@ -49,7 +52,7 @@ public class Player : MonoBehaviour {
         }
 
         //only allow shifting if you canShift and are pression left shift. A lot of shifty bussiness going on here -_0
-        if (Input.GetKeyDown(KeyCode.LeftShift)) {
+        if (Input.GetKeyDown(shiftWorldKey)) {
             if (canShift) {
                 ShiftWorlds();
             }else {
@@ -60,18 +63,20 @@ public class Player : MonoBehaviour {
         GUI.transform.Find("Top Left").GetComponent<Text>().text = dPulse.Mode.ToString();
         //.GetComponent<Text>().text = dPulse.Mode.ToString();
 
-        if (GM.paused) {
-            DisplayText("Middle", "PAUSED");
-        } else {
-            DisplayText("Middle", "");
+        if (Input.GetKeyDown(pauseKey)) {
+            if (GM.paused) {
+                DisplayText("Middle", "PAUSED");
+            } else {
+                DisplayText("Middle", "");
+            }
         }
     }
 
     //
     public void ShiftWorlds() {
         if(currentWorld == 1) { currentWorld = 2; } else { currentWorld = 1; }
-        world1.GetComponent<PhaseInteraction>().toggleChildrenVisibility();
-        world2.GetComponent<PhaseInteraction>().toggleChildrenVisibility();
+        world1.GetComponent<PhaseInteraction>().ToggleChildren();
+        world2.GetComponent<PhaseInteraction>().ToggleChildren();
     }
 
     private void FixedUpdate() {

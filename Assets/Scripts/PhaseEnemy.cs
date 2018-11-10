@@ -11,7 +11,7 @@ public class PhaseEnemy : MonoBehaviour {
     public int defaultWorld = 1;
 
     [Header("Phased Enemy Properties")]
-    public bool returnWithPlayer = false;
+    public bool returnWithPlayer = true;
     [Tooltip(" > 2 is suggested")] public float maxReturnDistance = 5;
     public GameObject player;
 

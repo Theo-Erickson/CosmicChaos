@@ -9,6 +9,10 @@ public class Player : MonoBehaviour {
     [Tooltip("Whether the player can shift themselves")]
     public bool canShift = true;
 
+    private AudioSource footStepSound;
+    private bool forwardFootStepSoundOn = false;
+    private bool horizontalFootStepSoundOn = false;
+
     [Header("Scanning")]
     public GameObject scannerFilter;
     public bool aimingAtInteractibleThing = false;
@@ -30,6 +34,7 @@ public class Player : MonoBehaviour {
     // Use this for initialization
     private void Awake(){
         GM = GameObject.Find("GameManager").GetComponent<GameManager>();
+        footStepSound = GetComponent<AudioSource>();
     }
 
     void Start () {
@@ -39,6 +44,10 @@ public class Player : MonoBehaviour {
 
         if(world1 == null) { GameObject.Find("World 1"); }
         if(world1 == null) { GameObject.Find("World 2"); }
+
+        // Controls if sound is already playing
+        forwardFootStepSoundOn = false;
+        horizontalFootStepSoundOn = false;
 
         //initial spawn point
         respawnPoint = this.transform.position;
@@ -82,16 +91,27 @@ public class Player : MonoBehaviour {
 
     private void FixedUpdate() {
         //movement
-
+        // Forward and Back movement
         if (Input.GetAxis("Vertical") > 0) {
             transform.localPosition += transform.forward * moveSpeed * Time.deltaTime;
-        } else if (Input.GetAxis("Vertical") < 0) {
-            transform.localPosition -= transform.forward * moveSpeed * Time.deltaTime;
+            PlayFootstepSound(ref forwardFootStepSoundOn);
         }
+        else if (Input.GetAxis("Vertical") < 0) {
+            transform.localPosition -= transform.forward * moveSpeed * Time.deltaTime;
+            PlayFootstepSound(ref forwardFootStepSoundOn);
+        } else{
+            PauseFootstepSound(ref forwardFootStepSoundOn);
+        }
+
+        // Side to Side movement
         if (Input.GetAxis("Horizontal") > 0) {
             transform.localPosition += transform.right * moveSpeed * Time.deltaTime;
+            PlayFootstepSound(ref horizontalFootStepSoundOn);
         } else if (Input.GetAxis("Horizontal") < 0) {
             transform.localPosition -= transform.right * moveSpeed * Time.deltaTime;
+            PlayFootstepSound(ref horizontalFootStepSoundOn);
+        } else {
+            PauseFootstepSound(ref horizontalFootStepSoundOn);
         }
     }
 
@@ -130,6 +150,26 @@ public class Player : MonoBehaviour {
         GUI.transform.Find(whichTextField).GetComponent<Text>().text = whatToSay;
         yield return new WaitForSeconds(delayBeforeDissappearInSeconds);
         GUI.transform.Find(whichTextField).GetComponent<Text>().text = "";
+    }
+
+    // Plays the Footstep audio
+    private void PlayFootstepSound(ref bool directionBool)
+    {
+        if (!forwardFootStepSoundOn && !horizontalFootStepSoundOn)
+        {
+            footStepSound.Play();
+            directionBool = true;
+        }
+    }
+
+    // Pauses the FootStep audio
+    private void PauseFootstepSound(ref bool directionBool)
+    {
+        if (directionBool)
+        {
+            footStepSound.Pause();
+            directionBool = false;
+        }
     }
 
 }

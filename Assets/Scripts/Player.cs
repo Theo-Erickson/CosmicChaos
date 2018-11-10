@@ -8,6 +8,7 @@ public class Player : MonoBehaviour {
     public float moveSpeed = 1.0f;
     [Tooltip("Whether the player can shift themselves")]
     public bool canShift = true;
+    public bool speedrunnerMode = false;
 
     private AudioSource footStepSound;
     private bool forwardFootStepSoundOn = false;
@@ -38,6 +39,9 @@ public class Player : MonoBehaviour {
     }
 
     void Start () {
+        if (speedrunnerMode) {
+            moveSpeed *= 5;
+        }
         //If you don't link it in the editor, it will try to find it where it expects it to be
         if(GUI == null) { this.transform.Find("GUI"); }
         if(dPulse == null) { this.transform.Find("Detection Sphere").GetComponent<DetectionPulse>(); }

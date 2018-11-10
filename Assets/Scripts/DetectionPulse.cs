@@ -23,7 +23,7 @@ public class DetectionPulse : MonoBehaviour {
 
     [Header("Range Values")]
     public float maxRange = 5.0f; //how big the pulse gets
-    public float expandSpeed = 1.0f; //how fast it gets there
+    public float expandSpeed = 3.0f; //how fast it gets there
 
     public GameObject visualizer; //referrence to possible visualizer objects
 

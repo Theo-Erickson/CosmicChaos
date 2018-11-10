@@ -1731,6 +1731,50 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 630519735}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &649563427
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 649563429}
+  - component: {fileID: 649563428}
+  m_Layer: 0
+  m_Name: JitterDoor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &649563428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 649563427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3948934d70dbbfd439c60decba4a7abc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jitterSpeed: 0
+  smoothMovement: 0
+  teleportPositions: []
+  countdown: 0
+--- !u!4 &649563429
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 649563427}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 69.32289, y: 5.741146, z: 89.69059}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &685448073
 GameObject:
   m_ObjectHideFlags: 0
@@ -2449,7 +2493,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 856352308}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -27.754997, y: -0.22000003, z: 75.5}
+  m_LocalPosition: {x: -27.754997, y: -0.29, z: 75.73}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 685448074}
@@ -2690,6 +2734,7 @@ GameObject:
   - component: {fileID: 987207090}
   - component: {fileID: 987207089}
   - component: {fileID: 987207092}
+  - component: {fileID: 987207093}
   m_Layer: 0
   m_Name: Real World Wall
   m_TagString: Untagged
@@ -2737,7 +2782,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 11023877c2a871d4fb0303bf85219dd2, type: 2}
+  - {fileID: 2100000, guid: 40674c21f8df4fa42bb82d9331b4e77e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2784,6 +2829,21 @@ MonoBehaviour:
   solidMaterialAlpha: 1
   transparentMaterialAlpha: 0.5
   player: {fileID: 0}
+--- !u!114 &987207093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 987207087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3948934d70dbbfd439c60decba4a7abc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jitterSpeed: 0.1
+  smoothMovement: 0
+  teleportPositions: []
+  countdown: 0
 --- !u!1 &1023610676
 GameObject:
   m_ObjectHideFlags: 0
@@ -3735,7 +3795,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1376249689}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 2.5, z: -9.88}
+  m_LocalPosition: {x: 0, y: 2.1, z: -9.861}
   m_LocalScale: {x: 0.10000006, y: 5, z: 5}
   m_Children: []
   m_Father: {fileID: 1373470433}

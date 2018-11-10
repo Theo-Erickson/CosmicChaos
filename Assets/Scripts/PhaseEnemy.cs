@@ -70,9 +70,14 @@ public class PhaseEnemy : MonoBehaviour {
     }
 
 
+    //THIS SHIT IS SUPER JANKY AND MADE OF VOODDOO, IF YOU DONT WANT TO BREAK THE SPACE TIME CONTINUUM, DONT TOUCH IT.
     public bool checkIfCanSwap() {
+        bool wasWithPlayer = false;
+        if(this.world != playerWorld) {
+            wasWithPlayer = true;
+        }
         if (Input.GetKeyDown(KeyCode.LeftShift) && playerScript.canShift) {
-            if (/*this.world != playerWorld &&*/ returnWithPlayer) {
+            if (returnWithPlayer && wasWithPlayer) {
                 //go along with player if they are close enough or phase out if they aren't
                 print("checking distance");
                 if (Vector3.Distance(this.transform.position, player.transform.position) < maxReturnDistance) {
@@ -81,7 +86,6 @@ public class PhaseEnemy : MonoBehaviour {
                 }
             }
         }
-
         return false;
     }
 

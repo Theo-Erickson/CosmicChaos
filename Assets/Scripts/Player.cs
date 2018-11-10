@@ -75,6 +75,10 @@ public class Player : MonoBehaviour {
         GUI.transform.Find("Top Left").GetComponent<Text>().text = dPulse.Mode.ToString();
         //.GetComponent<Text>().text = dPulse.Mode.ToString();
 
+        if (GM.paused) {
+            footStepSound.Stop();
+        }
+
         if (Input.GetKeyDown(pauseKey)) {
             if (!GM.paused) {
                 DisplayText("Middle", "PAUSED");
@@ -93,13 +97,16 @@ public class Player : MonoBehaviour {
     }
 
     private void FixedUpdate() {
+        footStepSound.pitch = 1.0f;
         //movement
         // Forward and Back movement
         if (Input.GetAxis("Vertical") > 0) {
+            footStepSound.pitch += Random.Range(-.2f, .2f);
             transform.localPosition += transform.forward * moveSpeed * Time.deltaTime;
             PlayFootstepSound(ref forwardFootStepSoundOn);
         }
         else if (Input.GetAxis("Vertical") < 0) {
+            footStepSound.pitch += Random.Range(-.2f, .2f);
             transform.localPosition -= transform.forward * moveSpeed * Time.deltaTime;
             PlayFootstepSound(ref forwardFootStepSoundOn);
         } else{
@@ -108,9 +115,11 @@ public class Player : MonoBehaviour {
 
         // Side to Side movement
         if (Input.GetAxis("Horizontal") > 0) {
+            footStepSound.pitch += Random.Range(-.2f, .2f);
             transform.localPosition += transform.right * moveSpeed * Time.deltaTime;
             PlayFootstepSound(ref horizontalFootStepSoundOn);
         } else if (Input.GetAxis("Horizontal") < 0) {
+            footStepSound.pitch += Random.Range(-.2f, .2f);
             transform.localPosition -= transform.right * moveSpeed * Time.deltaTime;
             PlayFootstepSound(ref horizontalFootStepSoundOn);
         } else {

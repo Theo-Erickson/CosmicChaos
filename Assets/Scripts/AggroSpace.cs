@@ -13,13 +13,12 @@ public class AggroSpace : MonoBehaviour{
     public bool playerInside = false;
 
     void Start() {
-        if (player == null) { player = GameObject.Find("Player"); }
+        player = GameObject.Find("Player");
     }
 
     private void OnTriggerStay(Collider other) {
         if (other.tag == "Player") {
             playerInside = true;
-            Debug.Log("player entered");
         }
     }
 

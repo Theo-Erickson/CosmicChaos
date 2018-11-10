@@ -161,7 +161,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1006168348359818}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.516, z: 2}
+  m_LocalPosition: {x: 100, y: 2.516, z: 104}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4611973916739396}
@@ -501,13 +501,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74d21e2b95f9684469ab6a2584b5803a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Type: 0
+  worldAllegiance: 1
+  clickable: 1
   visible: 1
   solid: 1
-  worldAllegiance: 0
-  player: {fileID: 0}
-  clickable: 1
+  collides: 0
   solidMaterialAlpha: 1
   transparentMaterialAlpha: 0.5
+  player: {fileID: 0}
 --- !u!114 &114135768281225234
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -519,13 +521,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74d21e2b95f9684469ab6a2584b5803a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Type: 0
+  worldAllegiance: 1
+  clickable: 1
   visible: 1
   solid: 1
-  worldAllegiance: 0
-  player: {fileID: 0}
-  clickable: 1
+  collides: 0
   solidMaterialAlpha: 1
   transparentMaterialAlpha: 0.5
+  player: {fileID: 0}
 --- !u!114 &114280747060908016
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -537,13 +541,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74d21e2b95f9684469ab6a2584b5803a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Type: 0
+  worldAllegiance: 1
+  clickable: 1
   visible: 1
   solid: 1
-  worldAllegiance: 0
-  player: {fileID: 0}
-  clickable: 1
+  collides: 0
   solidMaterialAlpha: 1
   transparentMaterialAlpha: 0.5
+  player: {fileID: 0}
 --- !u!114 &114493007629528266
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -555,13 +561,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74d21e2b95f9684469ab6a2584b5803a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Type: 0
+  worldAllegiance: 1
+  clickable: 1
   visible: 1
   solid: 1
-  worldAllegiance: 0
-  player: {fileID: 0}
-  clickable: 1
+  collides: 0
   solidMaterialAlpha: 1
   transparentMaterialAlpha: 0.5
+  player: {fileID: 0}
 --- !u!114 &114688270321949666
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -573,13 +581,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74d21e2b95f9684469ab6a2584b5803a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Type: 0
+  worldAllegiance: 1
+  clickable: 1
   visible: 1
   solid: 1
-  worldAllegiance: 0
-  player: {fileID: 0}
-  clickable: 1
+  collides: 1
   solidMaterialAlpha: 1
   transparentMaterialAlpha: 0.5
+  player: {fileID: 0}
 --- !u!114 &114891775953682654
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -591,13 +601,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74d21e2b95f9684469ab6a2584b5803a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Type: 0
+  worldAllegiance: 1
+  clickable: 1
   visible: 1
   solid: 1
-  worldAllegiance: 0
-  player: {fileID: 0}
-  clickable: 1
+  collides: 0
   solidMaterialAlpha: 1
   transparentMaterialAlpha: 0.5
+  player: {fileID: 0}
 --- !u!114 &114941818603817610
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -609,13 +621,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74d21e2b95f9684469ab6a2584b5803a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Type: 0
+  worldAllegiance: 1
+  clickable: 1
   visible: 1
   solid: 1
-  worldAllegiance: 0
-  player: {fileID: 0}
-  clickable: 1
+  collides: 0
   solidMaterialAlpha: 1
   transparentMaterialAlpha: 0.5
+  player: {fileID: 0}
 --- !u!136 &136123693598893756
 CapsuleCollider:
   m_ObjectHideFlags: 1

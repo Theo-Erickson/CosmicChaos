@@ -13,6 +13,9 @@ public class DetectionPulse : MonoBehaviour {
 
     public SphereCollider myCollider;
 
+    [Header("Key")]
+    public KeyCode activatePulseKey = KeyCode.RightShift;
+
     [Header("Energy Values")]
     public bool infiniteEnergy = false;
     public float maxEnergy = 100;  //how long the pulse can sustain itself
@@ -45,11 +48,11 @@ public class DetectionPulse : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (respondToKeyPress && Input.GetKeyDown(KeyCode.RightShift) && energy > startCost) {
+        if (respondToKeyPress && Input.GetKeyDown(activatePulseKey) && energy > startCost) {
             Activate();
         }
 
-        //toggle modes and only do so when the scanner is off
+        //Toggle modes and only do so when the scanner is off
         if(respondToKeyPress && Input.GetKeyDown(KeyCode.Slash) && myCollider.radius <= oldRadius) {
             if(Mode == visOrSolidity.solidity) {
                 Mode = visOrSolidity.visibility;
@@ -58,7 +61,7 @@ public class DetectionPulse : MonoBehaviour {
             } else {
                 Mode = visOrSolidity.solidity;
             }
-            print("toggled to: " + Mode.ToString());
+            print("Toggled to: " + Mode.ToString());
         }
 
         if (visualizer != null) {
@@ -104,6 +107,12 @@ public class DetectionPulse : MonoBehaviour {
 
     //if your sphere collider hits something else
     void OnTriggerEnter(Collider col) {
+        
+        if(col.tag == "phased") {
+            col.gameObject.GetComponent<PhaseInteraction>().PeekWorldChange(true);
+        }
+
+        /*
         if (Mode == visOrSolidity.solidity) {
             print("enter Solidity");
             if (col.tag == "phased") {
@@ -120,10 +129,15 @@ public class DetectionPulse : MonoBehaviour {
                 col.gameObject.GetComponent<PhaseInteraction>().setNonDefaultVisibility();
             }
         }
+        */
     }
 
     void OnTriggerExit(Collider col) {
-        if (Mode == visOrSolidity.solidity) {
+        if (col.tag == "phased") {
+            col.gameObject.GetComponent<PhaseInteraction>().PeekWorldChange(false);
+        }
+
+        /*if (Mode == visOrSolidity.solidity) {
             print("enter Solidity");
             if (col.tag == "phased") {
                 col.gameObject.GetComponent<PhaseInteraction>().setDefaultSolidity();
@@ -139,6 +153,7 @@ public class DetectionPulse : MonoBehaviour {
                 col.gameObject.GetComponent<PhaseInteraction>().setDefaultVisibility();
             }
         }
+        */
     }
 
 }

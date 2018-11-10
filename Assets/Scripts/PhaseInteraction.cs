@@ -1,39 +1,59 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 //Anything that can shift needs this class
 public class PhaseInteraction : MonoBehaviour {
-    //determines whether or not to render an object
-    public bool visible;
-
-    //non-solid objects will be transparent and can be walked through. Solid ones will appear opaque and will collide
-    public bool solid;
-
-    private bool defaultVisibility;
-
-    private bool defaultSolidity;
-
-    //this is here for if any future script wants to check which world this object belongs to.
-    //At the moment, this is not used for any code, but rather to just keep track of things
-    public int worldAllegiance;
-
-    public GameObject player;
-    //can you click on this to do something. SEE void OnMouseOver()
+    public enum ObjectType { Scenery, Entity, Root};
+    [Header("Phased Object Type")]
+    public ObjectType Type = ObjectType.Scenery;
+    [Tooltip("This is here for if any future script wants to check which world this object belongs to."+ 
+             "At the moment, this is not used for any code, but rather to just keep track of things")]
+    public int worldAllegiance = 1;
+    [Tooltip("can you click on this to do something. SEE void OnMouseOver()")]
     public bool clickable = true;
 
+    [Header("Visibility/Rendering")]
+    [Tooltip("Determines whether or not to render an object")]
+    public bool visible = true;
+    [Tooltip("Non-solid objects will appear partially transparent, see transparentMaterialAlpha")]
+    public bool solid = true;
+    [Tooltip("Whether an object can be walked through")]
+    public bool collides = true;
     public float solidMaterialAlpha = 1.0f;
-    //when this.solid = false, show texture slightly transparent
+    [Tooltip("when this.solid = false, show texture slightly transparent")]
     public float transparentMaterialAlpha = 0.5f;
 
-	// Use this for initialization
-	void Start () {
+
+    [Header("Player Reference")]
+    public GameObject player;
+
+
+
+    private bool defaultVisibility;
+    private bool defaultSolidity;
+    private bool defaultCollision;
+
+
+    // Use this for initialization
+    void Start () {
         if (GetComponent<Renderer>()) {
             CheckVisbility();
         }
         defaultSolidity = solid;
         defaultVisibility = visible;
         player = GameObject.Find("Player");
+        
+        //for level design, makes it so objects will try set their collision and visibility depending on if they are in the world the player starts in.
+        if (this.worldAllegiance != player.GetComponent<Player>().currentWorld) {
+            visible = false;
+            collides = false;
+        } else {
+            visible = true;
+            collides = true;
+        }
+        
     }
 	
 	// Update is called once per frame
@@ -49,14 +69,15 @@ public class PhaseInteraction : MonoBehaviour {
         if (clickable && this.visible) {
             //let player know they can interact with it
             player.GetComponent<Player>().aimingAtInteractibleThing = true;
+            /*
             if (Input.GetMouseButtonDown(0)) {
-                print(this.gameObject.name+": click change");
-                toggleMySolidity();
+                ToggleMyself();
             }
             if (Input.GetMouseButtonDown(1)) {
-                print("clock change children of: "+this.gameObject.name);
-                StartCoroutine(toggleChildrenSolidity(0.5f));
+                ToggleChildren();
+                ToggleMyself();
             }
+            */
         } else {
             player.GetComponent<Player>().aimingAtInteractibleThing = false;
         }
@@ -87,7 +108,13 @@ public class PhaseInteraction : MonoBehaviour {
         //NOTE: For clicking interactions, we need a collider of some sort, hence why we are setting the colliders to triggers and not disabling
         if (solid) {
             ChangeAlpha(GetComponent<Renderer>().material, solidMaterialAlpha);
+        } else {
+            ChangeAlpha(GetComponent<Renderer>().material, transparentMaterialAlpha);
+        }
 
+
+        //can you collide with the object
+        if (collides) {
             if (this.GetComponent<BoxCollider>()) {
                 GetComponent<BoxCollider>().isTrigger = false;
             }
@@ -99,8 +126,6 @@ public class PhaseInteraction : MonoBehaviour {
             }
 
         } else {
-            ChangeAlpha(GetComponent<Renderer>().material, transparentMaterialAlpha);
-
             if (this.GetComponent<BoxCollider>()) {
                 GetComponent<BoxCollider>().isTrigger = true;
             }
@@ -113,6 +138,7 @@ public class PhaseInteraction : MonoBehaviour {
         }
     }
 
+    /*
     public void setDefaultSolidity() {
         this.solid = defaultSolidity;
     }
@@ -134,7 +160,7 @@ public class PhaseInteraction : MonoBehaviour {
         setSolidity(solidity);
         setVisibility(visible);
     }
-
+    */
     public void setSolidity(bool solid) {
         this.solid = solid;
     }
@@ -142,72 +168,145 @@ public class PhaseInteraction : MonoBehaviour {
     public void setVisibility(bool visible) {
         this.visible = visible;
     }
-
-    public void toggleBoth() {
-        toggleMySolidity();
-        toggleMyVisibility();
+    /*
+    public void ToggleChildrenBoth(bool forward) {
+        ToggleChildrenSolidity();
+        ToggleChildrenVisibility();
     }
+    
+        */
 
-
-    public void toggleMySolidity() {
-        this.solid = !this.solid;
-    }
-
-    public void toggleMyVisibility() {
-        this.visible = !this.visible;
-    }
-
-
-    public void toggleChildrenBoth(bool forward) {
-        StartCoroutine(toggleChildrenSolidity(0.5f));
-        toggleChildrenVisibility();
-    }
-
-    //for all the children of this object, toggle their solidity one by one
-    public IEnumerator toggleChildrenSolidity(float delay) {
-        yield return new WaitForSeconds(delay);
+    //for all children of this object, make the world shift
+    //Scenery: make them invisible and nonColiding
+    //Enemy: if they are close to player, bring them to your new world, otherwise make them invisible and non-coliding  
+    public void ToggleChildren() {
         if (this.transform.childCount > 0) {
             List<GameObject> children = new List<GameObject>();
             for (int i = 0; i < this.transform.childCount; i++) {
                 children.Add(this.transform.GetChild(i).gameObject);
                 if (children[i].transform.childCount > 0) {
-                    StartCoroutine(children[i].GetComponent<PhaseInteraction>().toggleChildrenSolidity(0.5f));
+                    children[i].GetComponent<PhaseInteraction>().ToggleChildren();
                 }
                 if (children[i].GetComponent<PhaseInteraction>() != null) {
-                    StartCoroutine(children[i].GetComponent<PhaseInteraction>().toggleMySolidityOverTime(0.2f));
+                    children[i].GetComponent<PhaseInteraction>().ToggleMyself();
                 }
             }
         } else {
-            StartCoroutine(toggleMySolidityOverTime(0.2f));
-            //toggle your Solidity
+            ToggleMyself();
+            //Toggle your Visibility
+        }
+        
+    }
+
+    /*
+    //for all the children of this object, Toggle their solidity one by one
+    public void ToggleChildrenSolidity() {
+
+        if (this.transform.childCount > 0) {
+            List<GameObject> children = new List<GameObject>();
+            for (int i = 0; i < this.transform.childCount; i++) {
+                children.Add(this.transform.GetChild(i).gameObject);
+                if (children[i].transform.childCount > 0) {
+                    children[i].GetComponent<PhaseInteraction>().ToggleChildrenSolidity();
+                }
+                if (children[i].GetComponent<PhaseInteraction>() != null) {
+                    children[i].GetComponent<PhaseInteraction>().ToggleMySolidityOverTime(0.2f);
+                }
+            }
+        } else {
+            StartCoroutine(ToggleMySolidityOverTime(0.2f));
+            //Toggle your Solidity
         }
     }
 
     //for all children of this object, modify visibility one by one
-    public void toggleChildrenVisibility() {
+    public void ToggleChildrenVisibility() {
         if (this.transform.childCount > 0) {
             List<GameObject> children = new List<GameObject>();
             for (int i = 0; i < this.transform.childCount; i++) {
                 children.Add(this.transform.GetChild(i).gameObject);
                 if (children[i].transform.childCount > 0) {
-                    children[i].GetComponent<PhaseInteraction>().toggleChildrenVisibility();
+                    children[i].GetComponent<PhaseInteraction>().ToggleChildrenVisibility();
                 }
                 if (children[i].GetComponent<PhaseInteraction>() != null) {
-                    StartCoroutine(children[i].GetComponent<PhaseInteraction>().toggleMyVisibilityOverTime(0.2f));
+                    children[i].GetComponent<PhaseInteraction>().ToggleMyVisibility();
                 }
             }
         } else {
-            StartCoroutine(toggleMyVisibilityOverTime(0.2f));
-            //toggle your Solidity
+            ToggleMyVisibility();
+            //Toggle your Visibility
+        }
+    }
+    */
+    //if reveal: show what a world change would look like, ELSE: disable previewing
+    public void PeekWorldChange(bool previewing) {
+        if (previewing) {
+            //if the world that THIS object belongs to is the same as the player, make it non solid but still visible and collision. IE you are in world 1 and this block is also in world 1
+            if (this.worldAllegiance == player.GetComponent<Player>().currentWorld) {
+                print("peek my world solidity toggle");
+                setSolidity(false);
+                //everything in other world should become visible
+            } else {
+                print("peek other world visbility toggle");
+                setVisibility(true);
+            }
+        } else {
+            //if the world that THIS object belongs to is the same as the player, make it non solid but still visible and collision. IE you are in world 1 and this block is also in world 1
+            if (this.worldAllegiance == player.GetComponent<Player>().currentWorld) {
+                print("peek my world solidity toggle");
+                setSolidity(true);
+                //everything in other world should become visible
+            } else {
+                print("peek other world visbility toggle");
+                setVisibility(false);
+            }
         }
     }
 
-    public IEnumerator toggleMySolidityOverTime(float delay) {
+
+    //Make whatever changes you need to as a response to the world shift for your object type
+    //Scenery: make them invisible and nonColiding
+    //Enemy: if they are close to player, bring them to your new world, otherwise make them invisible and non-coliding  
+    public void ToggleMyself() {
+        if(worldAllegiance == 1) { worldAllegiance = 2; } else { worldAllegiance = 1; }
+        if(this.Type == ObjectType.Scenery) {
+            //print("ToggleMyself Scenery");
+            ToggleMyVisibility();
+            ToggleMyCollision();
+        }else if (this.Type == ObjectType.Entity) {
+            ToggleMyVisibility();
+            ToggleMyCollision();
+            //handled in the enemy Step Forward Code
+        }else if(this.Type == ObjectType.Root) {
+            //do nothing lol
+        }
+    }
+
+    public void ToggleBoth() {
+        ToggleMySolidity();
+        ToggleMyVisibility();
+    }
+
+
+    public void ToggleMySolidity() {
+        this.solid = !this.solid;
+    }
+
+    public void ToggleMyVisibility() {
+        this.visible = !this.visible;
+    }
+
+    public void ToggleMyCollision() {
+        this.collides = !this.collides;
+    }
+
+
+    public IEnumerator ToggleMySolidityOverTime(float delay) {
         yield return new WaitForSeconds(delay);
         this.solid = !this.solid;
     }
 
-    public IEnumerator toggleMyVisibilityOverTime(float delay) {
+    public IEnumerator ToggleMyVisibilityOverTime(float delay) {
         yield return new WaitForSeconds(delay);
         this.visible = !this.visible;
     }

@@ -64,12 +64,13 @@ public class Player : MonoBehaviour {
         //.GetComponent<Text>().text = dPulse.Mode.ToString();
 
         if (Input.GetKeyDown(pauseKey)) {
-            if (GM.paused) {
+            if (!GM.paused) {
                 DisplayText("Middle", "PAUSED");
             } else {
                 DisplayText("Middle", "");
             }
         }
+        
     }
 
     //

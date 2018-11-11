@@ -9,9 +9,9 @@ public class DoorSwitch : MonoBehaviour {
     [SerializeField] private KeyCode interactButton;
 
     [SerializeField] [Range(1f, 100f)] private float switchRotationSpeedForward;
-    [SerializeField] [Range(1f, 100f)] private float switchRotationSpeedBack;
+    [SerializeField] [Range(-1f, -100f)] private float switchRotationSpeedBack;
 
-    [SerializeField] [Range(-1f, -100f)] private float doorMoveSpeedUp;
+    [SerializeField] [Range(1f, 100f)] private float doorMoveSpeedUp;
     [SerializeField] [Range(-1f, -100f)] private float doorMoveSpeedDown;
 
     [SerializeField] private float doorMaxHeight;

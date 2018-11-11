@@ -10,6 +10,7 @@ public class Player : MonoBehaviour {
     public bool canShift = true;
     public bool speedrunnerMode = false;
 
+   [Header("Movement Sounds")]
     private AudioSource footStepSound;
     private bool forwardFootStepSoundOn = false;
     private bool horizontalFootStepSoundOn = false;
@@ -63,7 +64,7 @@ public class Player : MonoBehaviour {
         //stop player from shifting while pulse is active
         canShift = !transform.Find("Detection Sphere").GetComponent<DetectionPulse>().expanding;
         //If you fall through the floor or press "R"
-        if (this.transform.position.y < -50 || Input.GetKeyDown(KeyCode.R)) {
+        if (this.transform.position.y < -20 || Input.GetKeyDown(KeyCode.R)) {
             this.transform.position = respawnPoint;
         }
 

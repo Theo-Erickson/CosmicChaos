@@ -9,13 +9,21 @@ public class FallingDoorTrigger : MonoBehaviour {
     [SerializeField] private float finalHeight;
     [SerializeField] private float fallingSpeed;
 
+    private AudioSource DoorLockingSoundSource;
+
     private bool doorStartFalling = false;
+
+    private void Awake()
+    {
+        DoorLockingSoundSource = GetComponent<AudioSource>();
+    }
 
     private void Update()
     {
         if (doorStartFalling && fallingObject.position.y > finalHeight)
         {
             fallingObject.Translate(Vector3.down * fallingSpeed * Time.deltaTime);
+
         }
     }
 
@@ -24,6 +32,7 @@ public class FallingDoorTrigger : MonoBehaviour {
         if(other.tag == "Player")
         {
             doorStartFalling = true;
+            DoorLockingSoundSource.PlayOneShot(DoorLockingSoundSource.clip);
         }
     }
 }

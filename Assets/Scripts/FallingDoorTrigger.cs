@@ -10,6 +10,7 @@ public class FallingDoorTrigger : MonoBehaviour {
     [SerializeField] private float fallingSpeed;
 
     private AudioSource DoorLockingSoundSource;
+    private bool doorLocked = false;
 
     private bool doorStartFalling = false;
 
@@ -32,7 +33,11 @@ public class FallingDoorTrigger : MonoBehaviour {
         if(other.tag == "Player")
         {
             doorStartFalling = true;
-            DoorLockingSoundSource.PlayOneShot(DoorLockingSoundSource.clip);
+            if (!doorLocked)
+            {
+                doorLocked = true;
+                DoorLockingSoundSource.PlayOneShot(DoorLockingSoundSource.clip);
+            }
         }
     }
 }

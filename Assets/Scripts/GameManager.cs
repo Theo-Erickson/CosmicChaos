@@ -86,27 +86,31 @@ public class GameManager : MonoBehaviour {
         */
 
         if (playerScript.currentWorld == 1 && !playerPulse.expanding) {
-            mainCursor.sprite = Resources.Load<Sprite>("Cursors/NormalIdle");
+            LoadAnimCursor(mainCursor, "NormalIdle", 8);
         } else if (playerScript.currentWorld == 1 && playerPulse.expanding) {
-            mainCursor.sprite = Resources.Load<Sprite>("Cursors/NormalScanner");
+            LoadAnimCursor(mainCursor, "NormalScanner", 8);
         } else if (playerScript.currentWorld == 2 && !playerPulse.expanding) {
-            mainCursor.sprite = Resources.Load<Sprite>("Cursors/OtherIdle");
+            LoadAnimCursor(mainCursor, "OtherIdle", 8);
         } else if (playerScript.currentWorld == 2 && playerPulse.expanding) {
-            mainCursor.sprite = Resources.Load<Sprite>("Cursors/OtherScanner");
+            LoadAnimCursor(mainCursor, "OtherScanner", 8);
         }
 
-        if(playerScript.currentWorld == 1) {
-            XCursor.sprite = Resources.Load<Sprite>("Cursors/NormalUninteract");
-        }else{
-            XCursor.sprite = Resources.Load<Sprite>("Cursors/OtherUninteract");
+        print(XCursor);
+        if (playerScript.currentWorld == 1 && !playerScript.aimingAtInteractibleThing) {
+            LoadAnimCursor(XCursor, "NormalUnInteract", 8);
+        } else if (playerScript.currentWorld == 1 && playerScript.aimingAtInteractibleThing) {
+            LoadAnimCursor(XCursor, "NormalInteract", 8);
+        } else if (playerScript.currentWorld == 2 && !playerScript.aimingAtInteractibleThing) {
+            LoadAnimCursor(XCursor, "OtherUniteract", 8);
+        } else if (playerScript.currentWorld == 2 && playerScript.aimingAtInteractibleThing) {
+            LoadAnimCursor(XCursor, "OtherInteract", 8);
         }
+    }
 
-        if (playerScript.aimingAtInteractibleThing) {
-            XCursor.enabled = false;
-        } else {
-            XCursor.enabled = true;
+    private void LoadAnimCursor(Image cursor, string name, int numberOfFrames) {
+        for (int i = 0; i < numberOfFrames; i++) {
+            cursor.GetComponent<AnimatedCursor>().frames[i] = Resources.Load<Sprite>("Cursors/"+name+"/" + i);
+            //print(cursor.GetComponent<AnimatedCursor>().frames[i]);
         }
-
-
     }
 }

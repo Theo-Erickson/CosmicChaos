@@ -13,7 +13,6 @@ public class AnimatedCursor : MonoBehaviour {
 
         index = (int)(Time.time * framesPerSecond) % frames.Length;
         //index = index % frames.Length;
-        print(index);
         this.GetComponent<Image>().sprite = frames[index];
     }
 }

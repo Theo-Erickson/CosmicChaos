@@ -95,7 +95,6 @@ public class GameManager : MonoBehaviour {
             LoadAnimCursor(mainCursor, "OtherScanner", 8);
         }
 
-        print(XCursor);
         if (playerScript.currentWorld == 1 && !playerScript.aimingAtInteractibleThing) {
             LoadAnimCursor(XCursor, "NormalUnInteract", 8);
         } else if (playerScript.currentWorld == 1 && playerScript.aimingAtInteractibleThing) {

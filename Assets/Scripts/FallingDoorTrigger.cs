@@ -28,7 +28,7 @@ public class FallingDoorTrigger : MonoBehaviour {
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Player")
         {

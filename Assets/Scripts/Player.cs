@@ -80,6 +80,16 @@ public class Player : MonoBehaviour {
         GUI.transform.Find("Top Left").GetComponent<Text>().text = dPulse.Mode.ToString();
         //.GetComponent<Text>().text = dPulse.Mode.ToString();
 
+
+        //Slider for the UI for later use if we need it. Right now just counts down your detection pulse energy just as a proof of concept
+        Slider UISlider = GUI.transform.Find("Slider").GetComponent<Slider>();
+        if (dPulse.GetComponent<DetectionPulse>().infiniteEnergy) {
+            UISlider.gameObject.SetActive(false);
+        }else {
+            UISlider.gameObject.SetActive(true);
+            UISlider.value = (int)((dPulse.energy / dPulse.maxEnergy) * UISlider.maxValue);
+        }
+
         if (GM.paused) {
             footStepSound.Stop();
         }

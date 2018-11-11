@@ -67,7 +67,7 @@ public class GameManager : MonoBehaviour {
     public void changeCursor() {
         Image mainCursor = GUI.transform.Find("Reticle").GetComponent<Image>();
         Image XCursor = GUI.transform.Find("X Overlay").GetComponent<Image>();
-
+        /* OLD CURSORS
         if (playerScript.currentWorld == 1 && !playerPulse.expanding) {
             mainCursor.sprite = Resources.Load<Sprite>("Cursors/Cursor 1");
         } else if (playerScript.currentWorld == 1 && playerPulse.expanding) {
@@ -77,11 +77,36 @@ public class GameManager : MonoBehaviour {
         } else if (playerScript.currentWorld == 2 && playerPulse.expanding) {
             mainCursor.sprite = Resources.Load<Sprite>("Cursors/Cursor 4");
         }
+      
+        if (playerScript.aimingAtInteractibleThing) {
+            XCursor.enabled = false;
+        } else {
+            XCursor.enabled = true;
+        }
+        */
+
+        if (playerScript.currentWorld == 1 && !playerPulse.expanding) {
+            mainCursor.sprite = Resources.Load<Sprite>("Cursors/NormalIdle");
+        } else if (playerScript.currentWorld == 1 && playerPulse.expanding) {
+            mainCursor.sprite = Resources.Load<Sprite>("Cursors/NormalScanner");
+        } else if (playerScript.currentWorld == 2 && !playerPulse.expanding) {
+            mainCursor.sprite = Resources.Load<Sprite>("Cursors/OtherIdle");
+        } else if (playerScript.currentWorld == 2 && playerPulse.expanding) {
+            mainCursor.sprite = Resources.Load<Sprite>("Cursors/OtherScanner");
+        }
+
+        if(playerScript.currentWorld == 1) {
+            XCursor.sprite = Resources.Load<Sprite>("Cursors/NormalUninteract");
+        }else{
+            XCursor.sprite = Resources.Load<Sprite>("Cursors/OtherUninteract");
+        }
 
         if (playerScript.aimingAtInteractibleThing) {
             XCursor.enabled = false;
         } else {
             XCursor.enabled = true;
         }
+
+
     }
 }

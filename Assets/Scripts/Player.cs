@@ -63,7 +63,7 @@ public class Player : MonoBehaviour {
         //stop player from shifting while pulse is active
         canShift = !transform.Find("Detection Sphere").GetComponent<DetectionPulse>().expanding;
         //If you fall through the floor or press "R"
-        if (this.transform.position.y < 0 || Input.GetKeyDown(KeyCode.R)) {
+        if (this.transform.position.y < -50 || Input.GetKeyDown(KeyCode.R)) {
             this.transform.position = respawnPoint;
         }
 

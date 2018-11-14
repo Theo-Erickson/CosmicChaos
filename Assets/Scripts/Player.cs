@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Rendering.PostProcessing;
 
 public class Player : MonoBehaviour {
     [Header ("Movement")]
@@ -14,6 +15,13 @@ public class Player : MonoBehaviour {
     private AudioSource footStepSound;
     private bool forwardFootStepSoundOn = false;
     private bool horizontalFootStepSoundOn = false;
+
+    [Header("InSANITEH")]
+    public float shortTermSanity;
+    public float maxShortTermSanity = 100;
+    public float longTermSanity = 1000;
+
+
 
     [Header("Scanning")]
     public GameObject scannerFilter;
@@ -31,6 +39,8 @@ public class Player : MonoBehaviour {
     public Vector3 respawnPoint;
     public GameManager GM;
     public KeyCode pauseKey = KeyCode.Escape;
+    public ScriptableObject so;
+
 
 
     // Use this for initialization
@@ -40,6 +50,7 @@ public class Player : MonoBehaviour {
     }
 
     void Start () {
+        shortTermSanity = maxShortTermSanity;
         if (speedrunnerMode) {
             moveSpeed *= 5;
         }
@@ -82,13 +93,14 @@ public class Player : MonoBehaviour {
 
 
         //Slider for the UI for later use if we need it. Right now just counts down your detection pulse energy just as a proof of concept
-        Slider UISlider = GUI.transform.Find("Slider").GetComponent<Slider>();
-        if (dPulse.GetComponent<DetectionPulse>().infiniteEnergy) {
-            UISlider.gameObject.SetActive(false);
+        Slider SanitySlider = GUI.transform.Find("Slider").GetComponent<Slider>();
+        if (shortTermSanity == this.maxShortTermSanity) {
+            SanitySlider.gameObject.SetActive(false);
         }else {
-            UISlider.gameObject.SetActive(true);
-            UISlider.value = (int)((dPulse.energy / dPulse.maxEnergy) * UISlider.maxValue);
+            SanitySlider.gameObject.SetActive(true);
+            SanitySlider.value = (int)((shortTermSanity / maxShortTermSanity) * SanitySlider.maxValue);
         }
+
 
         if (GM.paused) {
             footStepSound.Stop();

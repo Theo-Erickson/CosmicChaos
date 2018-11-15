@@ -95,8 +95,8 @@ public class Player : MonoBehaviour {
             shortTermSanity += 0.5f;
         }
 
-        if (shortTermSanity < 0) {
-            shortTermSanity = 0;
+        if (shortTermSanity <= 1) {
+            shortTermSanity = 1;
             print("HOIIIVES!!");
         }
 

@@ -55,7 +55,7 @@ public class PhaseEnemy : MonoBehaviour {
                 //Move object towards player.
                 transform.position = Vector3.MoveTowards(transform.position, player.transform.position, step);
             }
-            //Stub for player damage script.
+            //player damage script.
             if (distanceFromPlayer <= minDistanceFromPlayer && this.world == playerScript.currentWorld) {
                 playerScript.shortTermSanity -= 1.0f;
                 playerScript.longTermSanity -= 1.0f;

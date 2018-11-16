@@ -8,7 +8,6 @@ public class SanityTiedPostProcess: MonoBehaviour
     public GameObject player;
     PostProcessVolume v_Volume;
     PostProcessVolume ch_Volume;
-    PostProcessVolume ld_Volume;
     Vignette m_Vignette;
     ChromaticAberration m_chroma;
 

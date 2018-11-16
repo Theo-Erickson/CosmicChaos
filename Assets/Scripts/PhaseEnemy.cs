@@ -16,6 +16,7 @@ public class PhaseEnemy : MonoBehaviour {
     public GameObject player;
 
 
+
     private Player playerScript;
 
     private float minDistanceFromPlayer = 1.5f; //Without this will move inside player/push player around
@@ -38,14 +39,14 @@ public class PhaseEnemy : MonoBehaviour {
 
         playerInAggroSpace = aggroSpace.GetComponent<AggroSpace>().playerInside;
         distanceFromPlayer = Vector3.Distance(player.transform.position, transform.position);
-        playerWorld = playerScript.currentWorld;
+        playerWorld = player.GetComponent<Player>().currentWorld;
 
     }
 
     private void Update() {
         playerInAggroSpace = aggroSpace.GetComponent<AggroSpace>().playerInside;
         distanceFromPlayer = Vector3.Distance(player.transform.position, transform.position);
-        playerWorld = playerScript.currentWorld;
+        playerWorld = player.GetComponent<Player>().currentWorld;
 
         if (active) {
             // print("p: "+playerWorld + " this: " +world + " aggro:"+playerInAggroSpace);
@@ -57,17 +58,7 @@ public class PhaseEnemy : MonoBehaviour {
             }
             //Stub for player damage script.
             if (distanceFromPlayer <= minDistanceFromPlayer && this.world == playerScript.currentWorld) {
-                playerScript.shortTermSanity -= 1.0f;
-                playerScript.longTermSanity -= 1.0f;
-                playerScript.playerHurt = true;
-                if(this.GetComponent<Jitter>() == true) {
-                    this.GetComponent<Jitter>().enabled = true;
-                }
-            } else {
-                playerScript.playerHurt = false;
-                if (this.GetComponent<Jitter>() == true) {
-                    this.GetComponent<Jitter>().enabled = false;
-                }
+                player.GetComponent<Player>().shortTermSanity -= 0.5f;
             }
 
             checkIfCanSwap();

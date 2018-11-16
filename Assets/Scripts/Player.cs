@@ -17,7 +17,6 @@ public class Player : MonoBehaviour {
     private bool horizontalFootStepSoundOn = false;
 
     [Header("InSANITEH")]
-    public bool playerHurt;
     public float shortTermSanity;
     public float maxShortTermSanity = 100;
     public float longTermSanity = 1000;
@@ -40,6 +39,7 @@ public class Player : MonoBehaviour {
     public Vector3 respawnPoint;
     public GameManager GM;
     public KeyCode pauseKey = KeyCode.Escape;
+    public ScriptableObject so;
 
 
 
@@ -100,18 +100,6 @@ public class Player : MonoBehaviour {
             SanitySlider.gameObject.SetActive(true);
             SanitySlider.value = (int)((shortTermSanity / maxShortTermSanity) * SanitySlider.maxValue);
         }
-
-        //regen sanity
-        if (!playerHurt && shortTermSanity < maxShortTermSanity) {
-            shortTermSanity += 0.5f;
-        }
-
-        if (shortTermSanity < 0) {
-            shortTermSanity = 0;
-            print("HOIIIVES!!");
-        }
-
-
 
 
         if (GM.paused) {

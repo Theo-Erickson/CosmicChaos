@@ -39,8 +39,12 @@ RenderSettings:
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_IndirectSpecularColor: {r: 0.0039991993, g: 0.00021814412, b: 0.000000051830114,
     a: 1}
+=======
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+>>>>>>> parent of 0fdfb65... I went back and manually added back everything that was lost by packaging within a prefab
 =======
   m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
 >>>>>>> parent of 0fdfb65... I went back and manually added back everything that was lost by packaging within a prefab
@@ -1236,6 +1240,7 @@ MeshCollider:
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: 55beefc0d359e6f43900a02f73c1fb8e, type: 3}
 <<<<<<< HEAD
+<<<<<<< HEAD
 --- !u!1 &248013660
 GameObject:
   m_ObjectHideFlags: 0
@@ -1442,6 +1447,8 @@ Light:
   m_ShadowRadius: 0
   m_ShadowAngle: 0
 =======
+=======
+>>>>>>> parent of 0fdfb65... I went back and manually added back everything that was lost by packaging within a prefab
 --- !u!114 &330959674 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 114714362085609912, guid: 399b90d7b8bb4904f87b2dec6cf32b23,
@@ -1540,6 +1547,7 @@ Transform:
     type: 2}
   m_PrefabInternal: {fileID: 933065939}
 <<<<<<< HEAD
+<<<<<<< HEAD
 --- !u!1 &362125126 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1262253383455098, guid: d930eb5c66b5e3c458c262155a3a981a,
@@ -1605,6 +1613,8 @@ Transform:
   m_Father: {fileID: 685448074}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+=======
+>>>>>>> parent of 0fdfb65... I went back and manually added back everything that was lost by packaging within a prefab
 =======
 >>>>>>> parent of 0fdfb65... I went back and manually added back everything that was lost by packaging within a prefab
 --- !u!1 &399374940
@@ -2271,9 +2281,12 @@ Transform:
   - {fileID: 191786423}
   - {fileID: 1721169372}
 <<<<<<< HEAD
+<<<<<<< HEAD
   - {fileID: 1052487177}
   - {fileID: 1573572603}
   - {fileID: 1196364209}
+=======
+>>>>>>> parent of 0fdfb65... I went back and manually added back everything that was lost by packaging within a prefab
 =======
 >>>>>>> parent of 0fdfb65... I went back and manually added back everything that was lost by packaging within a prefab
   m_Father: {fileID: 0}
@@ -2491,6 +2504,7 @@ Transform:
   - {fileID: 1824391973}
   m_Father: {fileID: 0}
   m_RootOrder: 2
+<<<<<<< HEAD
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &697068159
 GameObject:
@@ -2549,6 +2563,8 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 9
+=======
+>>>>>>> parent of 0fdfb65... I went back and manually added back everything that was lost by packaging within a prefab
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &698777631
 Prefab:
@@ -3947,6 +3963,7 @@ Prefab:
   m_SourcePrefab: {fileID: 100100000, guid: 3c4bec2f948edc048aceca258a87d56f, type: 2}
   m_IsPrefabAsset: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
 --- !u!1 &957297124
 GameObject:
   m_ObjectHideFlags: 0
@@ -4058,6 +4075,8 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b4dd9e63a8ca4543a9ba51904269a69, type: 2}
   m_IsPrefabAsset: 0
+=======
+>>>>>>> parent of 0fdfb65... I went back and manually added back everything that was lost by packaging within a prefab
 =======
 >>>>>>> parent of 0fdfb65... I went back and manually added back everything that was lost by packaging within a prefab
 --- !u!1 &987207087
@@ -4371,6 +4390,7 @@ BoxCollider:
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0.5, z: 0}
 <<<<<<< HEAD
+<<<<<<< HEAD
 --- !u!1 &1039327745 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1577484288986508, guid: 0b4dd9e63a8ca4543a9ba51904269a69,
@@ -4450,6 +4470,8 @@ MonoBehaviour:
   solidMaterialAlpha: 1
   transparentMaterialAlpha: 0.5
   player: {fileID: 0}
+=======
+>>>>>>> parent of 0fdfb65... I went back and manually added back everything that was lost by packaging within a prefab
 =======
 >>>>>>> parent of 0fdfb65... I went back and manually added back everything that was lost by packaging within a prefab
 --- !u!1 &1069011587
@@ -4541,6 +4563,7 @@ MeshFilter:
 --- !u!1001 &1098689435
 Prefab:
   m_ObjectHideFlags: 0
+<<<<<<< HEAD
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
@@ -4634,6 +4657,8 @@ GameObject:
 --- !u!4 &1108132771
 Transform:
   m_ObjectHideFlags: 0
+=======
+>>>>>>> parent of 0fdfb65... I went back and manually added back everything that was lost by packaging within a prefab
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1108132770}
@@ -6231,7 +6256,11 @@ Prefab:
     - target: {fileID: 4902362066276744, guid: 150420b2726edb04a937df7449804d89, type: 2}
       propertyPath: m_RootOrder
 <<<<<<< HEAD
+<<<<<<< HEAD
       value: 8
+=======
+      value: 1
+>>>>>>> parent of 0fdfb65... I went back and manually added back everything that was lost by packaging within a prefab
 =======
       value: 1
 >>>>>>> parent of 0fdfb65... I went back and manually added back everything that was lost by packaging within a prefab
@@ -6244,6 +6273,7 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 150420b2726edb04a937df7449804d89, type: 2}
   m_IsPrefabAsset: 0
+<<<<<<< HEAD
 <<<<<<< HEAD
 --- !u!1001 &1572415081
 Prefab:
@@ -6325,6 +6355,8 @@ MonoBehaviour:
   solidMaterialAlpha: 1
   transparentMaterialAlpha: 0.5
   player: {fileID: 0}
+=======
+>>>>>>> parent of 0fdfb65... I went back and manually added back everything that was lost by packaging within a prefab
 =======
 >>>>>>> parent of 0fdfb65... I went back and manually added back everything that was lost by packaging within a prefab
 --- !u!4 &1587140419 stripped
@@ -8313,12 +8345,16 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1790140829285608, guid: 399b90d7b8bb4904f87b2dec6cf32b23,
     type: 2}
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_PrefabInternal: {fileID: 1460606102}
 --- !u!4 &2053571299 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4907982563222558, guid: 399b90d7b8bb4904f87b2dec6cf32b23,
     type: 2}
   m_PrefabInternal: {fileID: 1460606102}
+=======
+  m_PrefabInternal: {fileID: 519152471}
+>>>>>>> parent of 0fdfb65... I went back and manually added back everything that was lost by packaging within a prefab
 =======
   m_PrefabInternal: {fileID: 519152471}
 >>>>>>> parent of 0fdfb65... I went back and manually added back everything that was lost by packaging within a prefab

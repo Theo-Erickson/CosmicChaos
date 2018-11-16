@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 50793a8a4f79ad047994da496fe77380
+guid: 11426099e5a158e49aa0c7cd5de3012b
 ScriptedImporter:
   fileIDToRecycleName:
     100000: EldritchMold/EldritchMold
@@ -27,7 +27,9 @@ ScriptedImporter:
     graphDescIndex: 0
     generateAllOutputs: 0
     generateMipMaps: 1
-    preset: " <sbspreset pkgurl=\"pkg://EldritchMold\" label=\"\" >\n </sbspreset>\n"
+    preset: " <sbspreset pkgurl=\"pkg://EldritchMold\" label=\"\" >\n  <presetinput
+      identifier=\"$randomseed\" uid=\"3368240344\" type=\"4\" value=\"7543\" />\n
+      </sbspreset>\n"
     shaderName: Standard
     outputNames: baseColor,normal,metallic,height
     texturePackingList:
@@ -82,5 +84,9 @@ ScriptedImporter:
       textureHeight: 256
       textureFormat: 0
       bGenerateOnLoad: 1
-    material: {instanceID: 0}
-    generatedTextures: []
+    material: {fileID: 2100000, guid: 11426099e5a158e49aa0c7cd5de3012b, type: 3}
+    generatedTextures:
+    - {fileID: 2800000, guid: 11426099e5a158e49aa0c7cd5de3012b, type: 3}
+    - {fileID: 2800002, guid: 11426099e5a158e49aa0c7cd5de3012b, type: 3}
+    - {fileID: 2800004, guid: 11426099e5a158e49aa0c7cd5de3012b, type: 3}
+    - {fileID: 2800006, guid: 11426099e5a158e49aa0c7cd5de3012b, type: 3}

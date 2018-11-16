@@ -11,18 +11,23 @@ public class Player : MonoBehaviour {
     public bool canShift = true;
     public bool speedrunnerMode = false;
 
-    [Header("Movement Sounds")]
+   [Header("Movement Sounds")]
     private AudioSource footStepSound;
     private bool forwardFootStepSoundOn = false;
     private bool horizontalFootStepSoundOn = false;
 
     [Header("InSANITEH")]
-    public bool aimingAtInteractibleThing;
     public bool playerHurt;
     public float shortTermSanity;
     public float maxShortTermSanity = 100;
     public float longTermSanity = 1000;
-    
+
+
+
+    [Header("Scanning")]
+    public GameObject scannerFilter;
+    public bool aimingAtInteractibleThing = false;
+
     [Header("World Switching")]
     public KeyCode shiftWorldKey = KeyCode.LeftShift;
     public int currentWorld = 1;
@@ -31,6 +36,7 @@ public class Player : MonoBehaviour {
 
     [Header("Object Referencing")]
     public GameObject GUI;
+    public DetectionPulse dPulse;
     public Vector3 respawnPoint;
     public GameManager GM;
     public KeyCode pauseKey = KeyCode.Escape;
@@ -50,6 +56,7 @@ public class Player : MonoBehaviour {
         }
         //If you don't link it in the editor, it will try to find it where it expects it to be
         if(GUI == null) { this.transform.Find("GUI"); }
+        if(dPulse == null) { this.transform.Find("Detection Sphere").GetComponent<DetectionPulse>(); }
 
         if(world1 == null) { GameObject.Find("World 1"); }
         if(world1 == null) { GameObject.Find("World 2"); }
@@ -66,6 +73,7 @@ public class Player : MonoBehaviour {
     void Update() {
         
         //stop player from shifting while pulse is active
+        canShift = !transform.Find("Detection Sphere").GetComponent<DetectionPulse>().expanding;
         //If you fall through the floor or press "R"
         if (this.transform.position.y < -20 || Input.GetKeyDown(KeyCode.R)) {
             this.transform.position = respawnPoint;
@@ -79,6 +87,9 @@ public class Player : MonoBehaviour {
                 StartCoroutine(DisplayFadingText("Middle", "Cannot Shift: Otherworldly Object Intererence", 2.0f));
             }
         }
+
+        GUI.transform.Find("Top Left").GetComponent<Text>().text = dPulse.Mode.ToString();
+        //.GetComponent<Text>().text = dPulse.Mode.ToString();
 
 
         //Slider for the UI for later use if we need it. Right now just counts down your detection pulse energy just as a proof of concept
@@ -162,6 +173,10 @@ public class Player : MonoBehaviour {
     void OnTriggerEnter(Collider col) {
         
     }
+
+
+
+
 
 
     //just show the message

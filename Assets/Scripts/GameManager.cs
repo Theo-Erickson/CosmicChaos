@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour {
 
     public GameObject player;
     public GameObject GUI;
+    public DetectionPulse playerPulse;
 
     public static GameManager instance = null;
 
@@ -26,6 +27,7 @@ public class GameManager : MonoBehaviour {
         if (player == null) { GameObject.Find("Player"); }
         playerScript = player.GetComponent<Player>();
         if (GUI == null) { GameObject.Find("GUI"); }
+        if (playerPulse == null) { player.GetComponentInChildren<DetectionPulse>(); }
     }
 
     void Start() {
@@ -83,12 +85,14 @@ public class GameManager : MonoBehaviour {
         }
         */
 
-        if (playerScript.currentWorld == 1) {
+        if (playerScript.currentWorld == 1 && !playerPulse.expanding) {
             LoadAnimCursor(mainCursor, "NormalIdle", 8);
-        //    LoadAnimCursor(mainCursor, "NormalScanner", 8);
-        } else if (playerScript.currentWorld == 2) {
+        } else if (playerScript.currentWorld == 1 && playerPulse.expanding) {
+            LoadAnimCursor(mainCursor, "NormalScanner", 8);
+        } else if (playerScript.currentWorld == 2 && !playerPulse.expanding) {
             LoadAnimCursor(mainCursor, "OtherIdle", 8);
-        //    LoadAnimCursor(mainCursor, "OtherScanner", 8);
+        } else if (playerScript.currentWorld == 2 && playerPulse.expanding) {
+            LoadAnimCursor(mainCursor, "OtherScanner", 8);
         }
 
         if (playerScript.currentWorld == 1 && !playerScript.aimingAtInteractibleThing) {
@@ -105,6 +109,7 @@ public class GameManager : MonoBehaviour {
     private void LoadAnimCursor(Image cursor, string name, int numberOfFrames) {
         for (int i = 0; i < numberOfFrames; i++) {
             cursor.GetComponent<AnimatedCursor>().frames[i] = Resources.Load<Sprite>("Cursors/"+name+"/" + i);
+            //print(cursor.GetComponent<AnimatedCursor>().frames[i]);
         }
     }
 }

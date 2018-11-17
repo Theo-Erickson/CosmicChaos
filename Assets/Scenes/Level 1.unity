@@ -1464,12 +1464,6 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!114 &330959674 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 114714362085609912, guid: 399b90d7b8bb4904f87b2dec6cf32b23,
-    type: 2}
-  m_PrefabInternal: {fileID: 519152471}
-  m_Script: {fileID: 11500000, guid: 15b043b6b591ab744b635983c5ad9beb, type: 3}
 --- !u!1 &338839418
 GameObject:
   m_ObjectHideFlags: 0
@@ -1941,6 +1935,16 @@ Prefab:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 23138497047682704, guid: 399b90d7b8bb4904f87b2dec6cf32b23,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1b0714cb0b9921b4697103f66a48f020, type: 2}
+    - target: {fileID: 23881921178745514, guid: 399b90d7b8bb4904f87b2dec6cf32b23,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f9c1f415d75155b419b34b40c8874c20, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 399b90d7b8bb4904f87b2dec6cf32b23, type: 2}
   m_IsPrefabAsset: 0
@@ -2486,7 +2490,7 @@ Prefab:
         type: 2}
       propertyPath: playerPulse
       value: 
-      objectReference: {fileID: 330959674}
+      objectReference: {fileID: 0}
     - target: {fileID: 1996514757100632, guid: 8fff0d2d870be264986793bce7fa39e8, type: 2}
       propertyPath: m_Icon
       value: 
@@ -5850,7 +5854,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2053571299}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!108 &1544779722
 Light:

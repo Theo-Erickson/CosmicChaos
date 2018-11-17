@@ -3,6 +3,37 @@ guid: 894b2fb89724a401e814c41c8bd41fd6
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
+    100000: Pipe
+    100002: Pipe_001
+    100004: Pipe_Fitting
+    100006: Pipe_Fitting_001
+    100008: Pipe_Fitting_002
+    100010: //RootNode
+    400000: Pipe
+    400002: Pipe_001
+    400004: Pipe_Fitting
+    400006: Pipe_Fitting_001
+    400008: Pipe_Fitting_002
+    400010: //RootNode
+    2100000: None__PipeFittingMapped_png
+    2100002: None__PipeOneMapped_png
+    2300000: Pipe
+    2300002: Pipe_001
+    2300004: Pipe_Fitting
+    2300006: Pipe_Fitting_001
+    2300008: Pipe_Fitting_002
+    3300000: Pipe
+    3300002: Pipe_001
+    3300004: Pipe_Fitting
+    3300006: Pipe_Fitting_001
+    3300008: Pipe_Fitting_002
+    4300000: Pipe_Fitting_002
+    4300002: Pipe_001
+    4300004: Pipe_Fitting_001
+    4300006: Pipe
+    4300008: Pipe_Fitting
+    7400000: Default Take
+    9500000: //RootNode
     2186277476908879412: ImportLogs
   externalObjects: {}
   materials:
@@ -56,7 +87,7 @@ ModelImporter:
     secondaryUVPackMargin: 4
     useFileScale: 1
     previousCalculatedGlobalScale: 1
-    hasPreviousCalculatedGlobalScale: 0
+    hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0

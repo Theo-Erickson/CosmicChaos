@@ -32,7 +32,6 @@ public class Player : MonoBehaviour {
 
     [Header("Object Referencing")]
     public GameObject GUI;
-    public DetectionPulse dPulse;
     public Vector3 respawnPoint;
     public GameManager GM;
     public KeyCode pauseKey = KeyCode.Escape;
@@ -53,7 +52,6 @@ public class Player : MonoBehaviour {
         }
         //If you don't link it in the editor, it will try to find it where it expects it to be
         if(GUI == null) { this.transform.Find("GUI"); }
-        if(dPulse == null) { this.transform.Find("Detection Sphere").GetComponent<DetectionPulse>(); }
 
 
 
@@ -68,8 +66,7 @@ public class Player : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         
-        //stop player from shifting while pulse is active
-        canShift = !transform.Find("Detection Sphere").GetComponent<DetectionPulse>().expanding;
+
         //If you fall through the floor or press "R"
         if (this.transform.position.y < -20 || Input.GetKeyDown(KeyCode.R)) {
             this.transform.position = respawnPoint;
@@ -84,8 +81,6 @@ public class Player : MonoBehaviour {
             }
         }
 
-        GUI.transform.Find("Top Left").GetComponent<Text>().text = dPulse.Mode.ToString();
-        //.GetComponent<Text>().text = dPulse.Mode.ToString();
 
 
         //Slider for the UI for later use if we need it. Right now just counts down your detection pulse energy just as a proof of concept

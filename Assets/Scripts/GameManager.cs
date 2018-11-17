@@ -8,8 +8,7 @@ public class GameManager : MonoBehaviour {
 
     public GameObject player;
     public GameObject GUI;
-    public DetectionPulse playerPulse;
-
+    
     public static GameManager instance = null;
 
     public bool paused = false;
@@ -27,7 +26,6 @@ public class GameManager : MonoBehaviour {
         if (player == null) { GameObject.Find("Player"); }
         playerScript = player.GetComponent<Player>();
         if (GUI == null) { GameObject.Find("GUI"); }
-        if (playerPulse == null) { player.GetComponentInChildren<DetectionPulse>(); }
     }
 
     void Start() {
@@ -85,13 +83,13 @@ public class GameManager : MonoBehaviour {
         }
         */
 
-        if (playerScript.currentWorld == 1 && !playerPulse.expanding) {
+        if (playerScript.currentWorld == 1 && playerScript.shortTermSanity > playerScript.maxShortTermSanity / 2.0f) {
             LoadAnimCursor(mainCursor, "NormalIdle", 8);
-        } else if (playerScript.currentWorld == 1 && playerPulse.expanding) {
+        } else if (playerScript.currentWorld == 1 && playerScript.shortTermSanity < playerScript.maxShortTermSanity / 2.0f) {
             LoadAnimCursor(mainCursor, "NormalScanner", 8);
-        } else if (playerScript.currentWorld == 2 && !playerPulse.expanding) {
+        } else if (playerScript.currentWorld == 2 && playerScript.shortTermSanity > playerScript.maxShortTermSanity / 2.0f) {
             LoadAnimCursor(mainCursor, "OtherIdle", 8);
-        } else if (playerScript.currentWorld == 2 && playerPulse.expanding) {
+        } else if (playerScript.currentWorld == 2 && playerScript.shortTermSanity < playerScript.maxShortTermSanity / 2.0f) {
             LoadAnimCursor(mainCursor, "OtherScanner", 8);
         }
 

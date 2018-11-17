@@ -58,10 +58,22 @@ public class PhaseEnemy : MonoBehaviour {
             }
             //Stub for player damage script.
             if (distanceFromPlayer <= minDistanceFromPlayer && this.world == playerScript.currentWorld) {
-                Debug.Log("I HOIT YOU =D");
+                player.GetComponent<Player>().shortTermSanity -= 0.5f;
+                playerScript.shortTermSanity -= 1.0f;
+                playerScript.longTermSanity -= 1.0f;
+                playerScript.playerHurt = true;
+                if (this.GetComponent<Jitter>() == true) {
+                    this.GetComponent<Jitter>().enabled = true;
+                }
+            } else {
+                playerScript.playerHurt = false;
+                if (this.GetComponent<Jitter>() == true) {
+                    this.GetComponent<Jitter>().enabled = false;
+                }
             }
+        
 
-            checkIfCanSwap();
+        checkIfCanSwap();
 
         }
 

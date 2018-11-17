@@ -15,8 +15,13 @@ public class Player : MonoBehaviour {
     private bool forwardFootStepSoundOn = false;
     private bool horizontalFootStepSoundOn = false;
 
+    [Header("InSANITEH")]
+    public bool playerHurt;
+    public float shortTermSanity;
+    public float maxShortTermSanity = 100;
+    public float longTermSanity = 1000;
+
     [Header("Scanning")]
-    public GameObject scannerFilter;
     public bool aimingAtInteractibleThing = false;
 
     [Header("World Switching")]
@@ -37,9 +42,12 @@ public class Player : MonoBehaviour {
     private void Awake(){
         GM = GameObject.Find("GameManager").GetComponent<GameManager>();
         footStepSound = GetComponent<AudioSource>();
+        if (world1 == null) { GameObject.Find("World 1"); }
+        if (world1 == null) { GameObject.Find("World 2"); }
     }
 
     void Start () {
+        shortTermSanity = maxShortTermSanity;
         if (speedrunnerMode) {
             moveSpeed *= 5;
         }
@@ -47,8 +55,7 @@ public class Player : MonoBehaviour {
         if(GUI == null) { this.transform.Find("GUI"); }
         if(dPulse == null) { this.transform.Find("Detection Sphere").GetComponent<DetectionPulse>(); }
 
-        if(world1 == null) { GameObject.Find("World 1"); }
-        if(world1 == null) { GameObject.Find("World 2"); }
+
 
         // Controls if sound is already playing
         forwardFootStepSoundOn = false;
@@ -82,12 +89,23 @@ public class Player : MonoBehaviour {
 
 
         //Slider for the UI for later use if we need it. Right now just counts down your detection pulse energy just as a proof of concept
-        Slider UISlider = GUI.transform.Find("Slider").GetComponent<Slider>();
-        if (dPulse.GetComponent<DetectionPulse>().infiniteEnergy) {
-            UISlider.gameObject.SetActive(false);
-        }else {
-            UISlider.gameObject.SetActive(true);
-            UISlider.value = (int)((dPulse.energy / dPulse.maxEnergy) * UISlider.maxValue);
+        Slider SanitySlider = GUI.transform.Find("Slider").GetComponent<Slider>();
+        if (shortTermSanity == this.maxShortTermSanity) {
+            SanitySlider.gameObject.SetActive(false);
+        } else {
+            SanitySlider.gameObject.SetActive(true);
+            SanitySlider.value = (int)((shortTermSanity / maxShortTermSanity) * SanitySlider.maxValue);
+        }
+
+        //Regen Sanity
+        if (!playerHurt && shortTermSanity < maxShortTermSanity) {
+            shortTermSanity += 0.5f;
+        }
+
+        //stub for when you die
+        if (shortTermSanity < 0) {
+            shortTermSanity = 0;
+            print("HOIIIVES!!");
         }
 
         if (GM.paused) {

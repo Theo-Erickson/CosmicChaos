@@ -54,14 +54,15 @@ public class AudioScript : MonoBehaviour {
 
     public static AudioScript instance = null;
 
-   public void Awake(){/*
+   public void Awake(){
+        // Alfredo: Uncommented this so that the instance wasn't null
         if(instance == null) {
             instance = this;
             DontDestroyOnLoad(this);
 
         } else {
             Destroy(gameObject);
-        }*/
+        }
     }
    
 	// Use this for initialization

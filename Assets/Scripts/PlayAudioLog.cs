@@ -4,4 +4,11 @@ using UnityEngine;
 
 public class PlayAudioLog : MonoBehaviour {
 
+    [SerializeField] private KeyCode interactButton;
+    private AudioSource audioLog;
+
+    private void Start()
+    {
+        audioLog = GetComponent<AudioSource>();
+    }
 }

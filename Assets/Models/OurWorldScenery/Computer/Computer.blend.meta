@@ -38,7 +38,32 @@ ModelImporter:
     7400000: Default Take
     9500000: //RootNode
     2186277476908879412: ImportLogs
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material
+    second: {fileID: 2100000, guid: f52fd62fedd605b47ba87033b8aa5ca9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material_001
+    second: {fileID: 2100000, guid: 7b747e56d1e1ac74da39718440e20f00, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material_002
+    second: {fileID: 2100000, guid: 7b747e56d1e1ac74da39718440e20f00, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material_003
+    second: {fileID: 2100000, guid: 1a96bfe3c1e970d47aef981bf92b6b04, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material_004
+    second: {fileID: 2100000, guid: 1a96bfe3c1e970d47aef981bf92b6b04, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

@@ -45,6 +45,7 @@ public class PhaseEnemy : MonoBehaviour {
 
     private void Update() {
         playerInAggroSpace = aggroSpace.GetComponent<AggroSpace>().playerInside;
+        if (playerInAggroSpace == null) print(this.transform);
         distanceFromPlayer = Vector3.Distance(player.transform.position, transform.position);
         playerWorld = player.GetComponent<Player>().currentWorld;
 

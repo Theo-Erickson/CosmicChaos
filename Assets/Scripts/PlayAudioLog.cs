@@ -28,6 +28,12 @@ public class PlayAudioLog : MonoBehaviour {
     {
         if (Input.GetKey(interactButton) && (Vector3.Distance(playerTransform.position, transform.position) <= playerDistFromSwitch))
         {
+            //player shifting worlds is disabled until they pick up an audio log
+            if (GameObject.Find("Player").GetComponent<Player>().canShift == false) {
+                GameObject.Find("Player").GetComponent<Player>().canShift = true;
+                GameObject.Find("Player").GetComponent<Player>().ShiftWorlds();
+                GameObject.Find("Player").GetComponent<Player>().DisplayFadingText("Middle", "SHIFT", 6.0f);
+            }
             if (!playedAudioLog)
             {
                 print(audioLog.name);

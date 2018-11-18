@@ -58,7 +58,7 @@ public class AudioScript : MonoBehaviour {
         // Alfredo: Uncommented this so that the instance wasn't null
         if(instance == null) {
             instance = this;
-            DontDestroyOnLoad(this);
+            //DontDestroyOnLoad(this);
 
         } else {
             Destroy(gameObject);
